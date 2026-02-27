@@ -3,98 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE TACTICAL v4.8 | Decision Support</title>
+    <title>ORACLE TACTICAL v4.9</title>
     <style>
-        :root { --bg: #010409; --panel: #0d1117; --orange: #f0883e; --green: #00ff41; --blue: #58a6ff; --accent: #00f2ff; --text: #c9d1d9; --border: #30363d; --red: #ff3e3e; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        :root { --bg: #010409; --panel: #0d1117; --orange: #f0883e; --green: #00ff41; --blue: #58a6ff; --accent: #00f2ff; --text: #c9d1d9; --border: #30363d; }
+        body { background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 15px; }
-        
         header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--orange); padding-bottom: 10px; }
-        .h-title { color: var(--orange); font-weight: bold; font-size: 1.1rem; text-align: center; letter-spacing: 1px; flex-grow: 1; }
-        
-        /* Stats Grid */
         .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         @media (min-width: 768px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
-        .card { background: var(--panel); border: 1px solid var(--border); padding: 15px; border-radius: 4px; text-align: center; position: relative; }
-        .val { font-size: 2rem; font-weight: 900; display: block; margin: 5px 0; color: var(--green); }
-        .c-label { font-size: 0.65rem; color: #8b949e; text-transform: uppercase; }
-
-        /* Response Steps Table */
-        .section-h { font-size: 0.8rem; color: var(--accent); margin-top: 10px; font-weight: bold; border-right: 3px solid var(--accent); padding-right: 8px; }
-        .response-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: var(--panel); border: 1px solid var(--border); }
-        .response-table td, .response-table th { padding: 10px; border-bottom: 1px solid var(--border); text-align: right; }
-        .level-low { color: var(--green); } .level-mid { color: var(--orange); } .level-high { color: var(--red); font-weight: bold; }
-
-        /* Change Log */
-        .log-box { background: rgba(88, 166, 255, 0.05); border: 1px solid var(--blue); padding: 12px; border-radius: 4px; font-size: 0.85rem; }
+        .card { background: var(--panel); border: 1px solid var(--border); padding: 15px; border-radius: 4px; text-align: center; }
         
-        /* Table */
-        .logic-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-        .logic-table th { background: #161b22; padding: 10px; border-bottom: 1px solid var(--border); }
-        .logic-table td { padding: 10px; border-bottom: 1px solid #21262d; }
-        .badge { padding: 2px 5px; border: 1px solid; border-radius: 2px; font-size: 0.65rem; font-weight: bold; }
+        /* Gauge Style */
+        .gauge-svg { width: 100px; height: 60px; }
+        .gauge-bg { fill: none; stroke: #21262d; stroke-width: 8; }
+        .gauge-fill { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.5s; }
+        .gauge-txt { font-size: 18px; font-weight: bold; fill: white; text-anchor: middle; }
+        
+        .section-h { font-size: 0.8rem; color: var(--accent); margin-top: 10px; font-weight: bold; border-right: 3px solid var(--accent); padding-right: 8px; }
+        
+        /* Threat Matrix */
+        .threat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .threat-box { background: #161b22; border: 1px solid var(--border); padding: 10px; text-align: center; font-size: 0.8rem; }
+        .t-val { color: var(--green); font-weight: bold; display: block; }
 
-        /* Disclaimer - Enhanced */
-        .disclaimer { border: 2px solid var(--red); background: rgba(255, 62, 62, 0.05); padding: 15px; border-radius: 6px; line-height: 1.6; }
-        .d-header { color: var(--red); font-weight: bold; display: block; margin-bottom: 5px; font-size: 1rem; text-decoration: underline; }
+        /* History Graph */
+        .history-container { height: 60px; display: flex; align-items: flex-end; gap: 4px; border-bottom: 1px solid var(--border); padding: 5px; }
+        .bar { flex: 1; background: var(--blue); opacity: 0.6; min-height: 2px; }
+
+        /* Response Steps */
+        .response-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: var(--panel); }
+        .response-table td { padding: 8px; border-bottom: 1px solid var(--border); }
+
+        .disclaimer { border: 1px solid var(--orange); background: rgba(240, 136, 62, 0.05); padding: 15px; border-radius: 6px; font-size: 0.85rem; line-height: 1.5; }
     </style>
 </head>
 <body>
 
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.65rem;">● SYSTEM: ONLINE<br>STABILITY: HIGH</div>
-        <div class="h-title">ORACLE TACTICAL DASHBOARD v4.8</div>
-        <div style="font-family:monospace; font-size:0.65rem; text-align:left;">LAST SYNC:<br><span id="sync-time">2026-02-27 15:37</span></div>
+        <div style="font-family:monospace; font-size:0.65rem;">● SYSTEM: ONLINE<br>SYNC: STABLE</div>
+        <div style="color:var(--orange); font-weight:bold;">ORACLE TACTICAL DASHBOARD v4.9</div>
+        <div style="font-family:monospace; font-size:0.65rem; text-align:left;">27-02-2026<br>15:45 IST</div>
     </header>
 
     <div class="grid-4">
-        <div class="card"><span class="c-label">NATIONAL B.R.I</span><span class="val">24%</span></div>
-        <div class="card"><span class="c-label">LOCAL B.R.I (NETANYA)</span><span class="val" style="color:var(--blue)">14%</span></div>
-        <div class="card"><span class="c-label">AVIATION SHIELD (V_A)</span><span class="val" style="color:var(--accent)">98%</span></div>
-        <div class="card"><span class="c-label">STRATEGIC ALERT (SAI)</span><span class="val" style="color:var(--orange)">47.1</span></div>
+        <div class="card">
+            <svg class="gauge-svg" viewBox="0 0 100 60">
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50" />
+                <path id="g-nat" class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#00ff41" stroke-dasharray="26, 94.2" />
+                <text x="50" y="45" class="gauge-txt">28%</text>
+            </svg>
+            <div style="font-size:0.6rem; color:#8b949e;">NATIONAL B.R.I</div>
+        </div>
+        <div class="card">
+            <svg class="gauge-svg" viewBox="0 0 100 60">
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50" />
+                <path id="g-loc" class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#58a6ff" stroke-dasharray="15, 94.2" />
+                <text x="50" y="45" class="gauge-txt" style="fill:#58a6ff">16%</text>
+            </svg>
+            <div style="font-size:0.6rem; color:#8b949e;">LOCAL B.R.I (NETANYA)</div>
+        </div>
+        <div class="card">
+            <svg class="gauge-svg" viewBox="0 0 100 60">
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50" />
+                <path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#00f2ff" stroke-dasharray="92, 94.2" />
+                <text x="50" y="45" class="gauge-txt" style="fill:#00f2ff">98%</text>
+            </svg>
+            <div style="font-size:0.6rem; color:#8b949e;">AVIATION SHIELD</div>
+        </div>
+        <div class="card">
+            <svg class="gauge-svg" viewBox="0 0 100 60">
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50" />
+                <path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#f0883e" stroke-dasharray="48, 94.2" />
+                <text x="50" y="45" class="gauge-txt" style="fill:#f0883e">51.2</text>
+            </svg>
+            <div style="font-size:0.6rem; color:#8b949e;">STRATEGIC ALERT (SAI)</div>
+        </div>
     </div>
 
-    <div class="section-h">📊 יומן שינויים וניתוח (CHANGELOG)</div>
-    <div class="log-box">
-        <b>עדכון אחרון:</b> ה-SAI נותר יציב על 47.1. למרות "רעש" תקשורתי (Vector C), וקטור A (תעופה) מציג רציפות מלאה בנתב"ג ובמרחב השרון (98%), מה שמונע מהציון הלאומי לעלות. הציון המקומי בנתניה נמוך משמעותית בשל היעדר אינדיקטורים לוגיסטיים (Engineering Equipment) באזור.
+    <div class="section-h">◆ מטריצת איומים לפי מקור (THREAT MATRIX)</div>
+    <div class="threat-grid">
+        <div class="threat-box">איראן<span class="t-val">18%</span></div>
+        <div class="threat-box">לבנון<span class="t-val">12%</span></div>
+        <div class="threat-box">תימן<span class="t-val">5%</span></div>
+        <div class="threat-box">עיראק<span class="t-val">5%</span></div>
     </div>
 
-    <div class="section-h">🛡️ פרוטוקול מדרגות תגובה (RESPONSE STEPS)</div>
+    <div class="section-h">◆ מגמת אחוזים - 24 שעות אחרונות (TRENDS)</div>
+    <div class="history-container">
+        <div class="bar" style="height:20%"></div><div class="bar" style="height:22%"></div>
+        <div class="bar" style="height:21%"></div><div class="bar" style="height:24%"></div>
+        <div class="bar" style="height:24%"></div><div class="bar" style="height:23%"></div>
+        <div class="bar" style="height:25%"></div><div class="bar" style="height:28%"></div>
+    </div>
+
+    <div class="section-h">🛡️ מדרגות תגובה (RESPONSE STEPS)</div>
     <table class="response-table">
-        <tr class="level-low"><td>0% - 15%</td><td><b>שגרה (Routine)</b></td><td>אין הנחיות מיוחדות. המשך פעילות רגילה.</td></tr>
-        <tr class="level-mid" style="background: rgba(240, 136, 62, 0.1);"><td>16% - 30%</td><td><b>דריכות (Elevated)</b></td><td>וידוא תקינות מרחב מוגן, טלפונים טעונים. ערנות מוגברת.</td></tr>
-        <tr class="level-high"><td>31% - 45%</td><td><b>ערנות (High)</b></td><td>צמצום שהייה בחוץ, הכנת תיק חירום, שהייה בקרבת מבנים.</td></tr>
-        <tr class="level-high" style="background: rgba(255, 62, 62, 0.1);"><td>45%+</td><td><b>קריטי (Critical)</b></td><td>כניסה למרחב מוגן לפי הנחיות פיקוד העורף.</td></tr>
+        <tr style="color:var(--green)"><td>0%-15%</td><td><b>שגרה (Routine)</b></td><td>המשך פעילות רגילה.</td></tr>
+        <tr style="background:rgba(240,136,62,0.1); color:var(--orange)"><td>16%-30%</td><td><b>דריכות (Elevated)</b></td><td>וידוא תקינות מרחב מוגן, טלפונים טעונים.</td></tr>
+        <tr style="color:#ff3e3e"><td>31%+</td><td><b>ערנות גבוהה (High)</b></td><td>צמצום שהייה בחוץ, קרבה למבנים מוגנים.</td></tr>
     </table>
 
-    <div class="section-h">🔍 ניתוח וקטורים דטרמיניסטי</div>
-    <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 4px; overflow: hidden;">
-        <table class="logic-table">
-            <thead>
-                <tr><th>וקטור</th><th>סוג</th><th>סטטוס</th><th>השפעה</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>SAI</td><td><span class="badge" style="border-color:var(--orange); color:var(--orange)">RISK</span></td><td>מתח אסטרטגי גבוה</td><td style="color:var(--orange)">+19%</td></tr>
-                <tr><td>VEC_A</td><td><span class="badge" style="border-color:var(--blue); color:var(--blue)">MITIG</span></td><td>הגנה אווירית מלאה</td><td style="color:var(--blue)">-10%</td></tr>
-                <tr><td>VEC_B</td><td><span class="badge" style="border-color:var(--green); color:var(--green)">SENSOR</span></td><td>GPS תקין בשרון</td><td>±0%</td></tr>
-                <tr><td>LOGS</td><td><span class="badge" style="border-color:var(--green); color:var(--green)">LOGISTIC</span></td><td>שגרת לוגיסטיקה</td><td>±0%</td></tr>
-            </tbody>
-        </table>
+    <div class="section-h">📝 ניתוח שינויים (LOG)</div>
+    <div style="font-size:0.85rem; background:#161b22; padding:10px; border-radius:4px;">
+        <b>שינוי מהעדכון הקודם:</b> עליית SAI ל-51.2 בשל זיהוי תנועת כוחות הנדסיים מוגברת בגזרה הצפונית. וקטור A (תעופה) נותר בשיא יציבותו, מה שמאזן את הציון הכללי ומונע חציית רף ה-30%.
     </div>
 
     <div class="disclaimer">
-        <span class="d-header">⚠ אזהרה חמורה (STRICT DISCLAIMER)</span>
-        <div style="font-size: 0.85rem;">
-            מודל זה הוא כלי עזר אנליטי (OSINT) בלבד. <b>הוא אינו מחליף את אפליקציית פיקוד העורף או את הצופרים.</b> המידע מבוסס על הצלבת נתוני שטח פיזיים אך עלול להכיל שגיאות. בכל מקרה של סתירה בין המודל להנחיות הרשמיות - <b>יש להישמע אך ורק לפיקוד העורף.</b>
-        </div>
+        <b style="color:var(--orange)">דגשים וסייגים (DISCLAIMER):</b><br>
+        המידע מוצג כמודל אנליטי (OSINT) ואינו מהווה הנחיה רשמית. במקרה של אזעקה, יש להישמע להנחיות <b>פיקוד העורף</b> באופן מיידי.
     </div>
 </div>
-
-<script>
-    // עדכון זמן אוטומטי לזמן המקומי של המשתמש בעת הטעינה
-    document.getElementById('sync-time').innerText = new Date().toLocaleString('he-IL', {hour12: false}).replace(',', '');
-</script>
 
 </body>
 </html>
