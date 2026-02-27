@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | Night Sync v7.9.4</title>
+    <title>ORACLE SYSTEM | v7.9.6 Liability Clear</title>
     <style>
         :root { 
             --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
@@ -31,19 +31,26 @@
         .card-sm .country-val { font-size: 2rem; font-weight: 900; color: var(--red); display: block; }
         .card-sm .prob-label { font-size: 0.7rem; color: #8b949e; margin-top: 5px; display: block; }
 
+        .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
+        .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
+        
         .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--orange); }
-        .disclaimer-box { background: rgba(11, 15, 20, 0.5); border: 1px solid var(--border); border-right: 4px solid var(--orange); padding: 20px; margin-top: 10px; border-radius: 4px; }
-        .disclaimer-text { font-size: 0.85rem; line-height: 1.6; color: #8b949e; }
+        
+        /* Updated Disclaimer Styling */
+        .disclaimer-box { background: rgba(15, 15, 20, 0.8); border: 1px solid var(--border); border-right: 4px solid var(--red); padding: 20px; margin-top: 10px; border-radius: 4px; }
+        .disclaimer-title { color: var(--red); font-weight: bold; font-size: 0.95rem; margin-bottom: 8px; display: block; }
+        .disclaimer-text { font-size: 0.85rem; line-height: 1.6; color: #b0b8c1; }
     </style>
 </head>
 <body>
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.9.4_NIGHT</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.9.6_LIABILITY</div>
         <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
         <div class="sync-badge">
             <span style="font-size: 0.65rem; color: var(--blue); display: block;">סנכרון לילה</span>
-            <span class="sync-time">21:18</span>
+            <span class="sync-time">21:25</span>
         </div>
     </header>
 
@@ -89,21 +96,34 @@
         </div>
     </div>
 
+    <div class="section-h">וקטורים משפיעים (Deterministic Data)</div>
+    <table class="data-table">
+        <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
+        <tbody>
+            <tr><td>SAI</td><td>מתח אסטרטגי (נתון נוכחי: 54.6)</td><td><span style="color:var(--orange)">STABLE</span></td><td>+27%</td></tr>
+            <tr><td>INFRA</td><td>הנחיות פקע"ר ותשתיות אזרחיות</td><td><span style="color:var(--orange)">RISK</span></td><td>+12%</td></tr>
+            <tr><td>LOGS_LOC</td><td>מוכנות עירונית ופתיחת מקלטים</td><td><span style="color:var(--blue)">READY</span></td><td>+13%</td></tr>
+            <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות פעיל)</td><td><span style="color:var(--blue)">MITIG</span></td><td>-15%</td></tr>
+        </tbody>
+    </table>
+
     <div class="section-h">ניתוח דטרמיניסטי (Logs)</div>
     <div class="log-box">
-        <b style="color:var(--orange)">סנכרון לילה (21:18):</b> מדד ה-SAI עומד על 54.6. נתוני השטח (GPS ירוק בלבנון ותנועה תקינה בנתב"ג) שומרים על המדד הלאומי מתחת לרף ה-50%. רמת המוכנות בנתניה נותרת בטווח הגבוה בשל פתיחת המקלטים המקומית. דגש על סגירת המרחב האווירי במערב איראן הלילה.
+        <b style="color:var(--orange)">סנכרון לילה (21:25):</b> מדד ה-SAI עומד על 54.6. וקטור התעופה נותר הגורם הממתן המרכזי בשל המשך טיסות זרות. איראן במוקד בשל ה-NOTAM הלילי. ה-GPS בלבנון תקין, מה שמעיד על העדר הכנה למטס מיידי.
     </div>
 
     <div class="disclaimer-box">
+        <span class="disclaimer-title">כתב ויתור והסרת אחריות (Liability Disclaimer)</span>
         <div class="disclaimer-text">
-            <b>הערה אופרטיבית:</b> המידע מבוסס על נתוני OSINT גלויים ואינו מערכת התרעה רשמית. 
-            בכל מקרה של אזעקה, יש לפעול מיידית לפי הנחיות פיקוד העורף.
+            השימוש בדשבורד זה ובנתונים המוצגים בו הנו על <b>אחריותו הבלעדית והמלאה של המשתמש בלבד</b>. המידע הנו מחקרי, מבוסס על נתוני OSINT גלויים, ואינו מהווה תחליף, בשום צורה, למערכות התרעה רשמיות או להנחיות פיקוד העורף. 
+            <br><br>
+            המערכת ויוצריה אינם נושאים באחריות לכל נזק, ישיר או עקיף, העלול להיגרם כתוצאה מהסתמכות על מדדי ההסתברות המוצגים. <b>בכל מקרה של אזעקה, צופר או חשש ביטחוני, יש להישמע אך ורק להנחיות הרשמיות של גורמי הביטחון בזמן אמת.</b>
         </div>
     </div>
 
     <div style="text-align:center; margin-top:10px; opacity:0.3; font-size:0.7rem; filter: grayscale(1);">
         <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V7&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
-        <br>V7.9.4_NIGHT_SYNC
+        <br>V7.9.6_LIABILITY_CLEAR
     </div>
 </div>
 </body>
