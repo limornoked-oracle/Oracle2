@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORACLE v4.6.2 | Tactical Dashboard</title>
+    <style>
+        :root { --bg: #010409; --panel: #0d1117; --orange: #f0883e; --green: #00ff41; --blue: #58a6ff; --accent: #00f2ff; --text: #c9d1d9; --border: #30363d; }
+        body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 15px; }
+        
+        header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--orange); padding-bottom: 10px; margin-bottom: 5px; }
+        .h-title { color: var(--orange); font-weight: bold; font-size: 1rem; text-align: center; letter-spacing: 1px; flex-grow: 1; }
+        
+        /* Main Stats Grid */
+        .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        @media (min-width: 768px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+        .card { background: var(--panel); border: 1px solid var(--border); padding: 15px; border-radius: 4px; text-align: center; }
+        .val { font-size: 1.8rem; font-weight: 900; display: block; margin: 5px 0; color: var(--green); }
+        .c-label { font-size: 0.65rem; color: var(--dim); text-transform: uppercase; }
+
+        /* Threat Matrix */
+        .matrix-title { font-size: 0.75rem; color: var(--accent); margin-top: 10px; font-weight: bold; }
+        .threat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        @media (min-width: 768px) { .threat-grid { grid-template-columns: repeat(4, 1fr); } }
+        .threat-box { background: #161b22; border: 1px solid var(--border); padding: 10px; text-align: center; font-size: 0.8rem; }
+        .t-val { color: var(--green); font-weight: bold; display: block; }
+
+        /* Logic Table */
+        .table-container { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: right; }
+        th { background: #161b22; padding: 10px; color: var(--dim); border-bottom: 1px solid var(--border); }
+        td { padding: 10px; border-bottom: 1px solid #21262d; }
+        .badge { padding: 2px 5px; border: 1px solid; border-radius: 2px; font-size: 0.65rem; font-weight: bold; }
+
+        /* Disclaimer */
+        .disclaimer { border: 2px solid var(--orange); background: rgba(240, 136, 62, 0.1); padding: 15px; border-radius: 6px; line-height: 1.6; text-align: justify; }
+        .d-header { color: var(--orange); font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <header>
+        <div style="font-family:monospace; font-size:0.65rem;">● LOG LIVE<br>ORACLE v4.6.2</div>
+        <div class="h-title">COMPREHENSIVE THREAT READINESS DASHBOARD</div>
+        <div style="font-family:monospace; font-size:0.65rem; text-align:left;">2026-02-27<br>14:40 IST</div>
+    </header>
+
+    <div class="grid-4">
+        <div class="card"><span class="c-label">NATIONAL B.R.I</span><span class="val">24%</span></div>
+        <div class="card"><span class="c-label">LOCAL B.R.I (Netanya)</span><span class="val" style="color:var(--blue)">14%</span></div>
+        <div class="card"><span class="c-label">AVIATION SHIELD</span><span class="val" style="color:var(--accent)">98%</span></div>
+        <div class="card"><span class="c-label">LOGISTICAL INTEGRITY</span><span class="val">95%</span></div>
+    </div>
+
+    <div class="matrix-title">◆ THREAT MATRIX BY ORIGIN</div>
+    <div class="threat-grid">
+        <div class="threat-box">איראן<span class="t-val">18%</span></div>
+        <div class="threat-box">לבנון<span class="t-val">12%</span></div>
+        <div class="threat-box">תימן<span class="t-val">5%</span></div>
+        <div class="threat-box">עיראק<span class="t-val">5%</span></div>
+    </div>
+
+    <div class="matrix-title">◆ SCORING LOGIC - 5 VECTORS</div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>פרמטר</th>
+                    <th>סוג</th>
+                    <th>תיאור</th>
+                    <th>השפעה</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SAI</td>
+                    <td><span class="badge" style="border-color:var(--orange); color:var(--orange)">RISK</span></td>
+                    <td>Strategic Alert Index</td>
+                    <td style="color:var(--orange)">+19%</td>
+                </tr>
+                <tr>
+                    <td>VEC_C</td>
+                    <td><span class="badge" style="border-color:var(--orange); color:var(--orange)">RISK</span></td>
+                    <td>Proxy Operational Noise</td>
+                    <td style="color:var(--orange)">+7%</td>
+                </tr>
+                <tr>
+                    <td>VEC_A</td>
+                    <td><span class="badge" style="border-color:var(--blue); color:var(--blue)">MITIG</span></td>
+                    <td>Aviation Shield Coverage</td>
+                    <td style="color:var(--blue)">-10%</td>
+                </tr>
+                <tr>
+                    <td>VEC_B</td>
+                    <td><span class="badge" style="border-color:var(--green); color:var(--green)">SENSOR</span></td>
+                    <td>Signal & GPS Integrity</td>
+                    <td>±0%</td>
+                </tr>
+                <tr>
+                    <td>LOGS</td>
+                    <td><span class="badge" style="border-color:var(--green); color:var(--green)">LOGISTIC</span></td>
+                    <td>Ground Logistics Status</td>
+                    <td>±0%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="disclaimer">
+        <span class="d-header">⚠ דיסקליימר (DISCLAIMER)</span>
+        <div style="font-size: 0.8rem;">
+            דשבורד זה הוא מודל אנליטי ניסיוני המבוסס על נתוני OSINT (מודיעין גלוי) בלבד. המידע מוצג "כפי שהוא" ואינו מהווה תחליף להנחיות רשמיות. **אין להסתמך על נתונים אלו לקבלת החלטות בטיחותיות או מבצעיות.** במקרה של אזעקה או אירוע ביטחוני, יש לפעול אך ורק על פי הנחיות **פיקוד העורף** באופן מיידי.
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
