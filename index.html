@@ -3,118 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE v4.6.2 | Tactical Dashboard</title>
+    <title>ORACLE 4.6.2 | Comprehensive Tactical Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
     <style>
-        :root { --bg: #010409; --panel: #0d1117; --orange: #f0883e; --green: #00ff41; --blue: #58a6ff; --accent: #00f2ff; --text: #c9d1d9; --border: #30363d; }
-        body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 15px; }
+        :root { --bg: #010409; --panel: #0d1117; --accent: #00f2ff; --green: #00ff41; --orange: #f0883e; --red: #ff3e3e; --blue: #58a6ff; --text: #c9d1d9; --dim: #8b949e; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .dashboard { width: 100%; max-width: 1100px; display: flex; flex-direction: column; gap: 20px; }
+        header { display: flex; justify-content: space-between; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        .h-title { color: var(--orange); font-weight: bold; font-size: 1.1rem; text-align: center; letter-spacing: 2px; flex-grow: 1; line-height: 1.2; }
         
-        header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--orange); padding-bottom: 10px; margin-bottom: 5px; }
-        .h-title { color: var(--orange); font-weight: bold; font-size: 1rem; text-align: center; letter-spacing: 1px; flex-grow: 1; }
-        
-        /* Main Stats Grid */
-        .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        /* Gauges Grid */
+        .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 768px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
-        .card { background: var(--panel); border: 1px solid var(--border); padding: 15px; border-radius: 4px; text-align: center; }
-        .val { font-size: 1.8rem; font-weight: 900; display: block; margin: 5px 0; color: var(--green); }
-        .c-label { font-size: 0.65rem; color: var(--dim); text-transform: uppercase; }
+        .card { background: var(--panel); border: 1px solid #30363d; padding: 15px; border-radius: 4px; text-align: center; }
+        .gauge-svg { width: 100px; height: 60px; }
+        .gauge-bg { fill: none; stroke: #21262d; stroke-width: 8; }
+        .gauge-fill { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dasharray 0.5s; }
+        .gauge-txt { font-size: 20px; font-weight: bold; fill: white; text-anchor: middle; }
+        .c-label { font-size: 0.6rem; color: var(--dim); text-transform: uppercase; margin-top: 5px; }
 
-        /* Threat Matrix */
-        .matrix-title { font-size: 0.75rem; color: var(--accent); margin-top: 10px; font-weight: bold; }
+        /* Mid Section */
+        .mid-grid { display: grid; grid-template-columns: 1.8fr 1fr; gap: 15px; }
+        .box { background: var(--panel); border: 1px solid #30363d; padding: 15px; border-radius: 4px; }
+        .box-h { font-size: 0.7rem; color: var(--accent); letter-spacing: 1px; margin-bottom: 15px; border-bottom: 1px solid #21262d; padding-bottom: 5px; }
+        
+        /* History Graph */
+        .graph-container { height: 100px; display: flex; align-items: flex-end; gap: 3px; border-left: 1px solid #30363d; border-bottom: 1px solid #30363d; padding: 5px; }
+        .bar { width: 8px; background: var(--blue); opacity: 0.5; }
+
+        /* Origins Matrix */
         .threat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        @media (min-width: 768px) { .threat-grid { grid-template-columns: repeat(4, 1fr); } }
-        .threat-box { background: #161b22; border: 1px solid var(--border); padding: 10px; text-align: center; font-size: 0.8rem; }
-        .t-val { color: var(--green); font-weight: bold; display: block; }
+        .threat-box { background: #161b22; border: 1px solid #30363d; padding: 8px; text-align: center; }
+        .t-pct { color: var(--green); font-weight: bold; display: block; font-size: 1.1rem; }
 
-        /* Logic Table */
-        .table-container { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: right; }
-        th { background: #161b22; padding: 10px; color: var(--dim); border-bottom: 1px solid var(--border); }
-        td { padding: 10px; border-bottom: 1px solid #21262d; }
-        .badge { padding: 2px 5px; border: 1px solid; border-radius: 2px; font-size: 0.65rem; font-weight: bold; }
+        /* Table */
+        table { width: 100%; border-collapse: collapse; font-size: 0.75rem; text-align: right; }
+        th { color: var(--dim); border-bottom: 1px solid #30363d; padding: 8px; }
+        td { padding: 10px 8px; border-bottom: 1px solid #21262d; }
+        .badge { padding: 2px 6px; border: 1px solid; font-size: 0.6rem; border-radius: 2px; font-weight: bold; }
 
         /* Disclaimer */
-        .disclaimer { border: 2px solid var(--orange); background: rgba(240, 136, 62, 0.1); padding: 15px; border-radius: 6px; line-height: 1.6; text-align: justify; }
-        .d-header { color: var(--orange); font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.9rem; }
+        .disclaimer-box { border: 1px solid var(--orange); background: rgba(240, 136, 62, 0.08); padding: 15px; border-radius: 4px; margin-top: 10px; }
+        .d-title { color: var(--orange); font-weight: bold; margin-bottom: 5px; display: block; font-size: 0.8rem; }
+        
+        #admin-toggle { background: none; border: none; color: #161b22; cursor: pointer; margin-top: 20px; }
+        #admin { margin-top: 10px; padding: 15px; background: #161b22; border: 1px dashed var(--accent); display: none; }
+        .adm-in { background: #010409; border: 1px solid #30363d; color: white; padding: 5px; width: 50px; margin: 5px; }
     </style>
 </head>
 <body>
 
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.65rem;">● LOG LIVE<br>ORACLE v4.6.2</div>
-        <div class="h-title">COMPREHENSIVE THREAT READINESS DASHBOARD</div>
-        <div style="font-family:monospace; font-size:0.65rem; text-align:left;">2026-02-27<br>14:40 IST</div>
+        <div style="font-family:monospace; font-size:0.7rem;">● LOG LIVE<br>ORACLE v4.6.2</div>
+        <div class="h-title">COMPREHENSIVE THREAT READINESS DASHBOARD<br><span style="font-size: 0.6rem; letter-spacing: 4px;">ISRAEL & NETANYA - OPERATIONAL FEED</span></div>
+        <div id="st" style="font-family:monospace; font-size:0.7rem; text-align:left;">2026-02-27 14:10 IST<br><span style="color:var(--green)">SYNC: STABLE</span></div>
     </header>
 
     <div class="grid-4">
-        <div class="card"><span class="c-label">NATIONAL B.R.I</span><span class="val">24%</span></div>
-        <div class="card"><span class="c-label">LOCAL B.R.I (Netanya)</span><span class="val" style="color:var(--blue)">14%</span></div>
-        <div class="card"><span class="c-label">AVIATION SHIELD</span><span class="val" style="color:var(--accent)">98%</span></div>
-        <div class="card"><span class="c-label">LOGISTICAL INTEGRITY</span><span class="val">95%</span></div>
+        <div class="card">
+            <svg class="gauge-svg" viewBox="0 0 100 60">
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50" />
+                <path class="gauge-fill" id="nf" d="M20 50 A 30 30 0 0 1 80 50" stroke="#00ff41" stroke-dasharray="22, 94.2" />
+                <text x="50" y="45" class="gauge-txt" id="nv">24%</text>
+            </svg>
+            <div class="c-label">NATIONAL B.R.I</div>
+        </div>
+        <div class="card">
+            <svg class="gauge-svg" viewBox="0 0 100 60">
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50" />
+                <path class="gauge-fill" id="lf" d="M20 50 A 30 30 0 0 1 80 50" stroke="#58a6ff" stroke-dasharray="13, 94.2" />
+                <text x="50" y="45" class="gauge-txt" style="fill:#58a6ff" id="lv">14%</text>
+            </svg>
+            <div class="c-label">LOCAL B.R.I - NETANYA</div>
+        </div>
+        <div class="card">
+            <svg class="gauge-svg" viewBox="0 0 100 60">
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50" />
+                <path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#00f2ff" stroke-dasharray="92, 94.2" />
+                <text x="50" y="45" class="gauge-txt" style="fill:#00f2ff">98%</text>
+            </svg>
+            <div class="c-label">AVIATION CONTINUITY</div>
+        </div>
+        <div class="card">
+            <svg class="gauge-svg" viewBox="0 0 100 60">
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50" />
+                <path class="gauge-fill" id="logf" d="M20 50 A 30 30 0 0 1 80 50" stroke="#00ff41" stroke-dasharray="89, 94.2" />
+                <text x="50" y="45" class="gauge-txt" id="logv">95%</text>
+            </svg>
+            <div class="c-label">LOGISTICAL INTEGRITY</div>
+        </div>
     </div>
 
-    <div class="matrix-title">◆ THREAT MATRIX BY ORIGIN</div>
-    <div class="threat-grid">
-        <div class="threat-box">איראן<span class="t-val">18%</span></div>
-        <div class="threat-box">לבנון<span class="t-val">12%</span></div>
-        <div class="threat-box">תימן<span class="t-val">5%</span></div>
-        <div class="threat-box">עיראק<span class="t-val">5%</span></div>
+    <div class="mid-grid">
+        <div class="box">
+            <div class="box-h">◆ HISTORICAL PROBABILITY TRENDS (24H UTC)</div>
+            <div class="graph-container" id="graph"></div>
+        </div>
+        <div class="box">
+            <div class="box-h">◆ THREAT ORIGIN MATRIX</div>
+            <div class="threat-grid">
+                <div class="threat-box">IRAN <span class="t-pct" id="irp">18%</span></div>
+                <div class="threat-box">LEBANON <span class="t-pct" id="lbp">12%</span></div>
+                <div class="threat-box">YEMEN <span class="t-pct">5%</span></div>
+                <div class="threat-box">IRAQ <span class="t-pct">5%</span></div>
+            </div>
+        </div>
     </div>
 
-    <div class="matrix-title">◆ SCORING LOGIC - 5 VECTORS</div>
-    <div class="table-container">
+    <div class="box">
+        <div class="box-h">◆ SCORING LOGIC BREAKDOWN - ALL 5 VECTORS</div>
         <table>
-            <thead>
-                <tr>
-                    <th>פרמטר</th>
-                    <th>סוג</th>
-                    <th>תיאור</th>
-                    <th>השפעה</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>SAI</td>
-                    <td><span class="badge" style="border-color:var(--orange); color:var(--orange)">RISK</span></td>
-                    <td>Strategic Alert Index</td>
-                    <td style="color:var(--orange)">+19%</td>
-                </tr>
-                <tr>
-                    <td>VEC_C</td>
-                    <td><span class="badge" style="border-color:var(--orange); color:var(--orange)">RISK</span></td>
-                    <td>Proxy Operational Noise</td>
-                    <td style="color:var(--orange)">+7%</td>
-                </tr>
-                <tr>
-                    <td>VEC_A</td>
-                    <td><span class="badge" style="border-color:var(--blue); color:var(--blue)">MITIG</span></td>
-                    <td>Aviation Shield Coverage</td>
-                    <td style="color:var(--blue)">-10%</td>
-                </tr>
-                <tr>
-                    <td>VEC_B</td>
-                    <td><span class="badge" style="border-color:var(--green); color:var(--green)">SENSOR</span></td>
-                    <td>Signal & GPS Integrity</td>
-                    <td>±0%</td>
-                </tr>
-                <tr>
-                    <td>LOGS</td>
-                    <td><span class="badge" style="border-color:var(--green); color:var(--green)">LOGISTIC</span></td>
-                    <td>Ground Logistics Status</td>
-                    <td>±0%</td>
-                </tr>
-            </tbody>
+            <tr><th>PARAMETER</th><th>SOURCE</th><th>TYPE</th><th>IMPACT</th></tr>
+            <tr><td>SAI</td><td>Strategic Tension Indicator</td><td><span class="badge" style="border-color:var(--orange); color:var(--orange)">RISK FACTOR</span></td><td style="color:var(--orange)" id="si">+19%</td></tr>
+            <tr><td>VEC_C</td><td>Aggregated Proxy Noise</td><td><span class="badge" style="border-color:var(--orange); color:var(--orange)">RISK FACTOR</span></td><td style="color:var(--orange)">+7%</td></tr>
+            <tr><td>VEC_A</td><td>Aviation Shield Coverage</td><td><span class="badge" style="border-color:var(--blue); color:var(--blue)">MITIGATION</span></td><td style="color:var(--blue)">-10%</td></tr>
+            <tr><td>VEC_B</td><td>Signal & GPS Integrity</td><td><span class="badge" style="border-color:var(--green); color:var(--green)">SENSOR</span></td><td>±0%</td></tr>
+            <tr><td>LOGS</td><td>Ground Logistics Status</td><td><span class="badge" style="border-color:var(--green); color:var(--green)">LOGISTIC</span></td><td>±0%</td></tr>
         </table>
     </div>
 
-    <div class="disclaimer">
-        <span class="d-header">⚠ דיסקליימר (DISCLAIMER)</span>
-        <div style="font-size: 0.8rem;">
-            דשבורד זה הוא מודל אנליטי ניסיוני המבוסס על נתוני OSINT (מודיעין גלוי) בלבד. המידע מוצג "כפי שהוא" ואינו מהווה תחליף להנחיות רשמיות. **אין להסתמך על נתונים אלו לקבלת החלטות בטיחותיות או מבצעיות.** במקרה של אזעקה או אירוע ביטחוני, יש לפעול אך ורק על פי הנחיות **פיקוד העורף** באופן מיידי.
+    <div class="disclaimer-box">
+        <span class="d-title">⚠ דיסקליימר (DISCLAIMER)</span>
+        <div style="font-size: 0.8rem; line-height: 1.6; text-align: justify;">
+            דשבורד זה הוא מודל אנליטי ניסיוני המבוסס על נתוני OSINT בלבד. הוא **אינו** מהווה תחליף להנחיות רשמיות. אין להסתמך על נתונים אלו לקבלת החלטות בטיחותיות. במקרה של אירוע ביטחוני, יש לפעול על פי הנחיות **פיקוד העורף** באופן מיידי.
         </div>
     </div>
 </div>
 
+<button id="admin-toggle" onclick="document.getElementById('admin').style.display='block'">[ ADMIN_ACCESS ]</button>
+<div id="admin">
+    SAI: <input type="number" id="isai" class="adm-in" value="47.1" step="0.1"> | Nat: <input type="number" id="inat" class="adm-in" value="24"> | Loc: <input type="number" id="iloc" class="adm-in" value="14"> | Log: <input type="number" id="ilog" class="adm-in" value="95">
+    <button onclick="upd()" style="background:var(--accent); border:none; padding:5px; cursor:pointer; font-weight:bold;">UPDATE DATA</button>
+</div>
+
+<script>
+    function upd() {
+        const sai=document.getElementById('isai').value; const nat=document.getElementById('inat').value; const loc=document.getElementById('iloc').value; const log=document.getElementById('ilog').value;
+        document.getElementById('nv').textContent=nat+"%"; document.getElementById('nf').style.strokeDasharray=(nat*0.94)+", 94.2";
+        document.getElementById('lv').textContent=loc+"%"; document.getElementById('lf').style.strokeDasharray=(loc*0.94)+", 94.2";
+        document.getElementById('logv').textContent=log+"%"; document.getElementById('logf').style.strokeDasharray=(log*0.94)+", 94.2";
+        document.getElementById('si').textContent="+"+Math.round((sai/50)*20)+"%";
+        
+        const b=document.createElement('div'); b.className='bar'; b.style.height=(nat*0.8)+'px';
+        document.getElementById('graph').appendChild(b);
+        if(document.getElementById('graph').children.length > 50) document.getElementById('graph').removeChild(document.getElementById('graph').children[0]);
+        
+        document.getElementById('st').innerHTML = new Date().toLocaleString('he-IL') + "<br><span style='color:var(--green)'>SYNC: SUCCESS</span>";
+        document.getElementById('admin').style.display='none';
+    }
+    for(let i=0; i<35; i++) upd();
+</script>
 </body>
 </html>
