@@ -3,130 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | Tactical Decision Support</title>
+    <title>ORACLE SYSTEM | Tactical Interface v5.2</title>
     <style>
-        :root { --bg: #010409; --panel: #0d1117; --orange: #f0883e; --green: #00ff41; --blue: #58a6ff; --accent: #00f2ff; --text: #c9d1d9; --border: #30363d; --red: #ff3e3e; }
-        body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        :root { 
+            --bg: #05070a; 
+            --panel: #0b0f14; 
+            --orange: #ff8c00; 
+            --green: #00ff41; 
+            --blue: #00d4ff; 
+            --accent: #00f2ff; 
+            --text: #e1e4e8; 
+            --border: #1b2129; 
+            --red: #ff3131; 
+            --glow: 0 0 15px rgba(0, 242, 255, 0.2);
+        }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 20px; }
         
-        header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--orange); padding-bottom: 10px; }
-        .section-h { font-size: 0.9rem; color: var(--accent); font-weight: bold; border-right: 3px solid var(--accent); padding-right: 10px; margin-top: 10px; text-transform: uppercase; }
+        /* Header & Sync Badge */
+        header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--accent); padding-bottom: 15px; }
+        .sync-badge { background: rgba(0, 212, 255, 0.1); border: 1px solid var(--blue); padding: 8px 15px; border-radius: 6px; text-align: left; box-shadow: var(--glow); }
+        .sync-label { font-size: 0.65rem; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; display: block; }
+        .sync-time { font-family: monospace; font-size: 1.2rem; font-weight: bold; color: var(--accent); }
 
-        /* Row 1: Big Gauges */
+        .h-main-title { color: var(--orange); font-weight: 900; font-size: 1.5rem; text-align: center; text-shadow: 0 0 15px rgba(255, 140, 0, 0.3); flex-grow: 1; }
+
+        .section-h { font-size: 1rem; color: var(--accent); font-weight: bold; border-right: 4px solid var(--accent); padding-right: 12px; margin-top: 5px; text-transform: uppercase; }
+
+        /* Main Stats */
         .main-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card-big { background: var(--panel); border: 1px solid var(--orange); padding: 25px; border-radius: 8px; text-align: center; }
-        .card-big .val { font-size: 3rem; font-weight: 900; color: var(--green); }
+        .card-big { background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 12px; text-align: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card-big.nat { border-top: 4px solid var(--orange); }
+        .card-big.loc { border-top: 4px solid var(--blue); }
+        .card-big .val { font-size: 4rem; font-weight: 900; color: var(--green); text-shadow: 0 0 20px rgba(0, 255, 65, 0.4); }
 
-        /* Row 2: Origin Matrix */
-        .origin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        /* Origin Matrix - ENLARGED */
+        .origin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 768px) { .origin-grid { grid-template-columns: repeat(4, 1fr); } }
-        .card-sm { background: var(--panel); border: 1px solid var(--border); padding: 15px; border-radius: 4px; text-align: center; }
+        .card-sm { background: var(--panel); border: 1px solid var(--border); padding: 25px 15px; border-radius: 8px; text-align: center; }
+        .card-sm .country-name { font-size: 1.4rem; font-weight: bold; color: var(--text); display: block; margin-bottom: 8px; }
+        .card-sm .country-val { font-size: 2rem; font-weight: 900; color: var(--red); }
         
-        /* Gauge SVG */
-        .gauge-svg { width: 120px; height: 70px; margin: 0 auto; }
-        .gauge-bg { fill: none; stroke: #21262d; stroke-width: 10; }
-        .gauge-fill { fill: none; stroke-width: 10; stroke-linecap: round; }
+        .gauge-svg { width: 100px; height: 55px; margin-bottom: 5px; opacity: 0.8; }
+        .gauge-bg { fill: none; stroke: #1b2129; stroke-width: 12; }
+        .gauge-fill { fill: none; stroke-width: 12; stroke-linecap: round; }
 
-        /* Response Steps Table */
-        .response-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); }
-        .response-table td, .response-table th { padding: 12px; border-bottom: 1px solid var(--border); text-align: right; }
-        .response-table th { background: #161b22; font-size: 0.8rem; color: #8b949e; }
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
+        .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
+        .badge { padding: 4px 8px; border: 1px solid; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
 
-        /* Logic Table */
-        .logic-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .logic-table td, .logic-table th { padding: 10px; border-bottom: 1px solid var(--border); text-align: right; }
-        .badge { padding: 2px 6px; border: 1px solid; border-radius: 2px; font-size: 0.7rem; font-weight: bold; }
-
-        /* Disclaimer - Full Legal Text */
-        .disclaimer-full { background: #0d1117; border: 1px solid #30363d; padding: 20px; font-size: 0.8rem; line-height: 1.6; color: #8b949e; border-radius: 4px; }
+        /* Disclaimer */
+        .disclaimer-full { background: #080a0e; border-right: 5px solid var(--red); padding: 25px; font-size: 0.9rem; line-height: 1.8; color: #9da5b1; border-radius: 4px; }
     </style>
 </head>
 <body>
 
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.7rem;">● LOG LIVE<br>ORACLE v5.0_TACTICAL</div>
-        <div style="color:var(--orange); font-weight:bold; font-size:1.2rem; text-align:center;">מערכת תומכת החלטה - ORACLE</div>
-        <div style="font-family:monospace; font-size:0.7rem; text-align:left;">סנכרון אחרון:<br>27.02.26 | 15:48</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 5.2_GOLD</div>
+        
+        <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
+
+        <div class="sync-badge">
+            <span class="sync-label">סנכרון אחרון</span>
+            <span class="sync-time">15:45</span>
+        </div>
     </header>
 
-    <div class="section-h">הסתברות דטרמיניסטית לאזעקה (B.R.I)</div>
+    <div class="section-h">מדדי הסתברות (Base Readiness Index)</div>
     <div class="main-stats">
-        <div class="card-big">
-            <div style="font-size: 0.8rem; color:var(--orange)">ישראל (לאומי)</div>
+        <div class="card-big nat">
+            <div style="font-size: 1rem; color:var(--orange); letter-spacing: 1px; font-weight: bold;">ישראל (לאומי)</div>
             <div class="val">28%</div>
-            <div style="font-size: 0.7rem; color:#8b949e">סטטוס: דריכות מוגברת</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--orange)">דריכות מוגברת</span></div>
         </div>
-        <div class="card-big" style="border-color: var(--blue);">
-            <div style="font-size: 0.8rem; color:var(--blue)">נתניה (מקומי)</div>
-            <div class="val" style="color:var(--blue)">16%</div>
-            <div style="font-size: 0.7rem; color:#8b949e">סטטוס: שגרה מתוחה</div>
+        <div class="card-big loc">
+            <div style="font-size: 1rem; color:var(--blue); letter-spacing: 1px; font-weight: bold;">נתניה (מקומי)</div>
+            <div class="val" style="color:var(--blue); text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);">16%</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: שגרה מתוחה</div>
         </div>
     </div>
 
-    <div class="section-h">מטריצת איומים לפי מקור (Origin Matrix)</div>
+    <div class="section-h">מטריצת מקורות איום (Threat Origin)</div>
     <div class="origin-grid">
         <div class="card-sm">
+            <span class="country-name">איראן</span>
             <svg class="gauge-svg" viewBox="0 0 100 60">
-                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50"/><path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#ff3e3e" stroke-dasharray="17, 94.2"/>
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50"/><path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#ff3131" stroke-dasharray="17, 94.2"/>
             </svg>
-            <div style="font-size:0.75rem;">איראן</div><b style="color:var(--red)">18%</b>
+            <span class="country-val">18%</span>
         </div>
         <div class="card-sm">
+            <span class="country-name">לבנון</span>
             <svg class="gauge-svg" viewBox="0 0 100 60">
-                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50"/><path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#ff3e3e" stroke-dasharray="11, 94.2"/>
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50"/><path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#ff3131" stroke-dasharray="11, 94.2"/>
             </svg>
-            <div style="font-size:0.75rem;">לבנון</div><b style="color:var(--red)">12%</b>
+            <span class="country-val">12%</span>
         </div>
         <div class="card-sm">
+            <span class="country-name">תימן</span>
             <svg class="gauge-svg" viewBox="0 0 100 60">
-                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50"/><path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#f0883e" stroke-dasharray="5, 94.2"/>
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50"/><path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#ff8c00" stroke-dasharray="5, 94.2"/>
             </svg>
-            <div style="font-size:0.75rem;">תימן</div><b>5%</b>
+            <span class="country-val">5%</span>
         </div>
         <div class="card-sm">
+            <span class="country-name">עיראק</span>
             <svg class="gauge-svg" viewBox="0 0 100 60">
-                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50"/><path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#f0883e" stroke-dasharray="5, 94.2"/>
+                <path class="gauge-bg" d="M20 50 A 30 30 0 0 1 80 50"/><path class="gauge-fill" d="M20 50 A 30 30 0 0 1 80 50" stroke="#ff8c00" stroke-dasharray="5, 94.2"/>
             </svg>
-            <div style="font-size:0.75rem;">עיראק</div><b>5%</b>
+            <span class="country-val">5%</span>
         </div>
     </div>
 
-    <div class="section-h">פרוטוקול מדרגות תגובה (Action Tiers)</div>
-    <table class="response-table">
-        <thead><tr><th>רמת סיכון</th><th>הגדרה</th><th>הנחיות לביצוע</th></tr></thead>
+    <div class="section-h">פרוטוקול תגובה אופרטיבי (Action Tiering)</div>
+    <table class="data-table">
+        <thead><tr><th>טווח</th><th>סטטוס</th><th>הנחיות מבצעיות</th></tr></thead>
         <tbody>
-            <tr style="color:var(--green)"><td>0% - 15%</td><td>שגרה מלאה</td><td>המשך פעילות רגילה ללא הגבלות.</td></tr>
-            <tr style="color:var(--orange); background:rgba(240,136,62,0.05)"><td>16% - 30%</td><td>דריכות (Elevated)</td><td>וידוא תקינות מרחב מוגן, טלפונים טעונים וזמינים. ערנות מוגברת.</td></tr>
-            <tr style="color:#ffae00"><td>31% - 45%</td><td>ערנות גבוהה</td><td>הימנעות משהייה בשטחים פתוחים מבודדים, הכנת תיק חירום לשהייה ממושכת.</td></tr>
-            <tr style="color:var(--red); background:rgba(255, 62, 62, 0.1)"><td>45% +</td><td>סטטוס קריטי</td><td>שהייה בקרבת מרחב מוגן (זמן הגעה 0-15 שניות). מעקב רציף אחרי צופרים.</td></tr>
+            <tr style="color:var(--green)"><td>0% - 15%</td><td>שגרה מלאה</td><td>המשך פעילות רגילה.</td></tr>
+            <tr style="color:var(--orange); background:rgba(255,140,0,0.05)"><td>16% - 30%</td><td>דריכות (Elevated)</td><td>וידוא מרחב מוגן תקין, מכשירים טעונים.</td></tr>
+            <tr style="color:#ffd700"><td>31% - 45%</td><td>ערנות גבוהה</td><td>הימנעות משטחים פתוחים מבודדים, הכנת תיק חירום.</td></tr>
+            <tr style="color:var(--red); background:rgba(255,49,49,0.1)"><td>45% +</td><td>קריטי</td><td>שהייה בקרבת מרחב מוגן מיידי. מעקב צופרים.</td></tr>
         </tbody>
     </table>
 
-    <div class="section-h">ניתוח שינויים וקטוריים (Analysis Log)</div>
-    <div style="background: #161b22; padding: 15px; border-radius: 4px; font-size: 0.9rem; line-height: 1.5;">
-        <b>עדכון:</b> ה-SAI עלה ל-51.2 בשל זיהוי פריסת יכולות אסטרטגיות במעגל ראשון ושני. עם זאת, וקטור A (תעופה) נשאר יציב ב-98% ווקטור B (שיבושי GPS) תקין בשרון. פער זה בין ה-SAI לשטח מונע בשלב זה קפיצה לרמת ערנות גבוהה.
+    <div class="section-h">ניתוח שינויים וקטוריים (Logs)</div>
+    <div style="background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--accent);">
+        <b style="color:var(--accent)">ניתוח אחרון:</b> ה-SAI עומד על 51.2. עלייה קלה בסיכון בשל זיהוי תנועת לוגיסטיקה כבדה במעגל ראשון. המדד הלאומי (28%) נבלם לפני רמת "ערנות גבוהה" בזכות וקטור A המציג יציבות תעופתית מלאה.
     </div>
 
-    <div class="section-h">פירוט הפרמטרים המשפיעים (5-Vector Scoreboard)</div>
-    <table class="logic-table">
-        <thead><tr><th>פרמטר</th><th>תיאור מבצעי</th><th>סוג</th><th>תרומה לסיכון</th></tr></thead>
+    <div class="section-h">פירוט פרמטרים משפיעים (5 Vectors)</div>
+    <table class="data-table">
+        <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
         <tbody>
-            <tr><td>SAI</td><td>מדד מתח אסטרטגי (כוחות/תקשורת)</td><td><span class="badge" style="color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+21%</td></tr>
-            <tr><td>VEC_C</td><td>רעש מבצעי (פרוקסי/לוחמה פסיכולוגית)</td><td><span class="badge" style="color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+7%</td></tr>
-            <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות אזרחי)</td><td><span class="badge" style="color:var(--blue)">MITIG</span></td><td style="color:var(--blue)">-10%</td></tr>
-            <tr><td>VEC_B</td><td>תקינות סיגנל (GPS/תקשורת שטח)</td><td><span class="badge" style="color:var(--green)">SENSOR</span></td><td>0%</td></tr>
-            <tr><td>LOGS</td><td>לוגיסטיקה וציוד הנדסי בשטח</td><td><span class="badge" style="color:var(--green)">LOGISTIC</span></td><td>0%</td></tr>
+            <tr><td>SAI</td><td>מדד מתח אסטרטגי</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+21%</td></tr>
+            <tr><td>VEC_C</td><td>רעש מבצעי / פרוקסי</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+7%</td></tr>
+            <tr><td>VEC_A</td><td>חסינות תעופתית אזרחית</td><td><span class="badge" style="color:var(--blue); border-color:var(--blue)">MITIG</span></td><td style="color:var(--blue)">-10%</td></tr>
+            <tr><td>VEC_B</td><td>תקינות סיגנל ו-GPS</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">SENSOR</span></td><td>0%</td></tr>
+            <tr><td>LOGS</td><td>לוגיסטיקה וציוד הנדסי</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">LOGISTIC</span></td><td>0%</td></tr>
         </tbody>
     </table>
 
-    <div class="section-h">דגשים, סייגים ותנאי שימוש (Legal Disclaimer)</div>
+    <div class="section-h">סייגים ותנאי שימוש משפטיים</div>
     <div class="disclaimer-full">
-        מודל זה (Oracle Tactical v5.0) הינו כלי אנליטי המבוסס על טכנולוגיית OSINT (Open Source Intelligence) בלבד. המערכת משקללת נתונים פיזיים וסטטיסטיים גלויים ואינה ניזונה ממקורות רשמיים מסווגים. 
+        <b>הבהרה משפטית מלאה:</b> דשבורד ORACLE (להלן: "המערכת") הוא כלי מחקרי בלבד המבוסס על הצלבת נתוני מודיעין גלוי (OSINT). המידע המוצג אינו מהווה הנחיה ביטחונית, הוראה אופרטיבית או תחליף למערכות ההתרעה הממלכתיות של מדינת ישראל. 
         <br><br>
-        <b>הבהרה חמורה:</b> המידע המוצג בדשבורד זה אינו מהווה הנחיה ביטחונית, הוראה אופרטיבית או תחליף למערכות ההתרעה הממלכתיות של מדינת ישראל. בכל מקרה של סתירה בין נתוני המודל לבין הודעות פיקוד העורף, דובר צה"ל או כוחות הביטחון - <b>יש לפעול אך ורק על פי ההנחיות הרשמיות.</b> 
-        <br><br>
-        השימוש במידע הוא על אחריות המשתמש בלבד. המפתחים אינם אחראים לכל נזק, ישיר או עקיף, העלול להיגרם כתוצאה מהסתמכות על נתוני המודל, טעויות בחישוב, עיכובים בעדכון הנתונים או "התרעות שווא" (False Positives). המודל נועד לספק תמונה הסתברותית בלבד ואינו יכול לחזות אירועים נקודתיים בוודאות מוחלטת.
+        בכל מצב של סתירה בין נתוני המודל לבין הודעות פיקוד העורף, דובר צה"ל או כוחות הביטחון - <b>יש לפעול אך ורק על פי ההנחיות הרשמיות.</b> השימוש במידע הוא על אחריות המשתמש בלבד. המפתחים אינם אחראים לכל נזק, ישיר או עקיף, העלול להיגרם כתוצאה מהסתמכות על נתוני המערכת. המערכת מספקת תמונה הסתברותית המבוססת על וקטורים פיזיים, אך אינה יכולה לחזות פעולות צבאיות בוודאות מוחלטת.
     </div>
 </div>
 
