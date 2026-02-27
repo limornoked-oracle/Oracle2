@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | v7.7</title>
+    <title>ORACLE SYSTEM | v7.8 Full Restoration</title>
     <style>
         :root { 
             --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
@@ -23,12 +23,18 @@
         .card-big.loc { border-top: 4px solid var(--blue); }
         .card-big .val { font-size: 4rem; font-weight: 900; color: var(--orange); }
         .card-big.loc .val { color: var(--blue); }
+        
+        /* Origins Matrix */
         .origin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 768px) { .origin-grid { grid-template-columns: repeat(4, 1fr); } }
         .card-sm { background: var(--panel); border: 1px solid var(--border); padding: 20px 10px; border-radius: 8px; text-align: center; }
         .flag-img { width: 45px; height: auto; border-radius: 3px; margin-bottom: 10px; border: 1px solid #30363d; }
-        .card-sm .country-val { font-size: 1.8rem; font-weight: 900; color: var(--red); display: block; }
-        .card-sm .prob-label { font-size: 0.65rem; color: #8b949e; text-transform: uppercase; }
+        .card-sm .country-val { font-size: 2rem; font-weight: 900; color: var(--red); display: block; }
+        .card-sm .prob-label { font-size: 0.7rem; color: #8b949e; margin-top: 5px; display: block; }
+
+        .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
+        .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
         .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--orange); }
         .disclaimer-box { background: rgba(11, 15, 20, 0.5); border: 1px solid var(--border); border-right: 4px solid var(--orange); padding: 20px; margin-top: 10px; border-radius: 4px; }
         .disclaimer-text { font-size: 0.85rem; line-height: 1.6; color: #8b949e; }
@@ -37,11 +43,11 @@
 <body>
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.7_VECTORS</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.8_RESTORATION</div>
         <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
         <div class="sync-badge">
             <span style="font-size: 0.65rem; color: var(--blue); display: block;">סנכרון שבת</span>
-            <span class="sync-time">17:15</span>
+            <span class="sync-time">17:21</span>
         </div>
     </header>
 
@@ -89,19 +95,32 @@
 
     <div class="section-h">ניתוח דטרמיניסטי (Logs)</div>
     <div class="log-box">
-        <b style="color:var(--orange)">ניתוח וקטורים אינדיבידואלי (17:15):</b> איראן היא מוקד הסיכון המרכזי (35%) בשל ה-NOTAM לסגירת שמיים במערב המדינה. בלבנון מזוהה דריכות גבוהה אך ה-GPS הירוק מעיד על העדר מיסוך מיידי להתקפה. האחוזים משקפים הסתברות לשיגור נשק ב-24 השעות הקרובות.
+        <b style="color:var(--orange)">ניתוח אחרון (17:21):</b> הסבירות הפרטנית לתקיפה מאיראן (35%) נשענת על נתוני ה-NOTAM לסגירת המרחב האווירי במערב המדינה. בלבנון (25%), העדר שיבושי GPS (וקטור B ירוק) מעיד על מוכנות ללא "חתימת שיגור" מיידית. המדד הלאומי מיושר ל-42% בשל הצטברות וקטורי התשתית.
     </div>
 
+    <div class="section-h">וקטורים משפיעים (Deterministic Data)</div>
+    <table class="data-table">
+        <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
+        <tbody>
+            <tr><td>SAI</td><td>מתח אסטרטגי (איראן/לבנון)</td><td><span style="color:var(--orange)">RISK</span></td><td>+23%</td></tr>
+            <tr><td>INFRA</td><td>הנחיות פקע"ר ותשתיות</td><td><span style="color:var(--orange)">RISK</span></td><td>+12%</td></tr>
+            <tr><td>LOGS_LOC</td><td>מוכנות עירונית (נתניה)</td><td><span style="color:var(--blue)">READY</span></td><td>+10%</td></tr>
+            <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות)</td><td><span style="color:var(--blue)">MITIG</span></td><td>-10%</td></tr>
+        </tbody>
+    </table>
+
     <div class="disclaimer-box">
+        <span class="disclaimer-title">הערה אופרטיבית</span>
         <div class="disclaimer-text">
-            <b>הערה אופרטיבית:</b> המידע מבוסס על נתוני OSINT דטרמיניסטיים וניתוח חתימות אויב. 
-            בכל מצב של אזעקה, יש לפעול מיידית לפי הנחיות פיקוד העורף ללא קשר לאחוזי המודל.
+            דשבורד ORACLE הוא כלי לניתוח הסתברות אסטרטגית המבוסס על נתוני OSINT גלויים. 
+            <b>בכל מקרה של אזעקה או הנחיה רשמית, יש לפעול מיידית אך ורק לפי הנחיות פיקוד העורף.</b> 
+            השימוש בנתונים הוא על אחריות המשתמש בלבד.
         </div>
     </div>
 
     <div style="text-align:center; margin-top:10px; opacity:0.3; font-size:0.7rem; filter: grayscale(1);">
         <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V7&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
-        <br>VECTORS_V7.7_FINAL_SYNC
+        <br>FULL_RESTORATION_V7.8
     </div>
 </div>
 </body>
