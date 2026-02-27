@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | Resilience v6.2</title>
+    <title>ORACLE SYSTEM | Truth Patch v7.2</title>
     <style>
         :root { 
             --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
             --blue: #00d4ff; --accent: #00f2ff; --text: #e1e4e8; --border: #1b2129; 
-            --red: #ff3131; --glow: 0 0 15px rgba(0, 242, 255, 0.2);
+            --red: #ff3131; --glow: 0 0 15px rgba(0, 212, 255, 0.2);
         }
         body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 20px; }
@@ -22,86 +22,87 @@
         .card-big { background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 12px; text-align: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .card-big.nat { border-top: 4px solid var(--orange); }
         .card-big.loc { border-top: 4px solid var(--blue); }
-        .card-big .val { font-size: 4rem; font-weight: 900; color: var(--green); text-shadow: 0 0 20px rgba(0, 255, 65, 0.4); }
+        .card-big .val { font-size: 4rem; font-weight: 900; color: var(--orange); }
+        .card-big.loc .val { color: var(--blue); }
         .origin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 768px) { .origin-grid { grid-template-columns: repeat(4, 1fr); } }
         .card-sm { background: var(--panel); border: 1px solid var(--border); padding: 25px 15px; border-radius: 8px; text-align: center; }
         .flag-img { width: 45px; height: auto; border-radius: 3px; margin-bottom: 10px; border: 1px solid #30363d; }
-        .card-sm .country-name { font-size: 1.1rem; font-weight: bold; color: var(--text); display: block; margin-bottom: 8px; }
         .card-sm .country-val { font-size: 1.8rem; font-weight: 900; color: var(--red); }
         .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
         .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
         .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
-        .badge { padding: 4px 8px; border: 1px solid; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
-        .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--accent); }
+        .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--green); }
         .disclaimer-full { background: #080a0e; border-right: 5px solid var(--red); padding: 20px; font-size: 0.85rem; line-height: 1.8; color: #9da5b1; border-radius: 4px; }
     </style>
 </head>
 <body>
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 6.2_RESILIENCE</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.2_TRUTH</div>
         <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
         <div class="sync-badge">
-            <span class="sync-label">סנכרון אחרון</span>
-            <span class="sync-time">17:15</span>
+            <span class="sync-label">סנכרון שבת</span>
+            <span class="sync-time">17:03</span>
         </div>
     </header>
 
     <div class="section-h">מדדי הסתברות (Base Readiness Index)</div>
     <div class="main-stats">
         <div class="card-big nat">
-            <div style="font-size: 1rem; color:var(--orange); letter-spacing: 1px; font-weight: bold;">ישראל (לאומי)</div>
-            <div class="val">35%</div>
-            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--green)">שגרה דרוכה</span></div>
+            <div style="font-size: 1rem; color:var(--orange); font-weight: bold;">ישראל (לאומי)</div>
+            <div class="val">38%</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--orange)">ערנות טקטית</span></div>
         </div>
         <div class="card-big loc">
-            <div style="font-size: 1rem; color:var(--blue); letter-spacing: 1px; font-weight: bold;">נתניה (מקומי)</div>
-            <div class="val" style="color:var(--blue); text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);">18%</div>
-            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: שגרה מלאה</div>
+            <div style="font-size: 1rem; color:var(--blue); font-weight: bold;">נתניה (מקומי)</div>
+            <div class="val">40%</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--blue)">מוכנות לוגיסטית</span></div>
         </div>
+    </div>
+
+    <div class="section-h">ניתוח דטרמיניסטי (Logs)</div>
+    <div class="log-box">
+        <b style="color:var(--green)">עדכון 17:03:</b> תיקון דטרמיניסטי - מפות GNSS מראות שמיים נקיים משיבושים (ירוק) מעל לבנון וסוריה, מה שמוריד את הסבירות למגע מיידי בדקות הקרובות. המדד הלאומי ירד ל-38%. עם זאת, פתיחת המקלטים בנתניה (40%) והודעת ה-NOTAM האיראנית על סגירת שמיים בלילה מחייבים דריכות מודיעינית בשעות הקרובות. וקטור A (תעופה) נותר יציב.
     </div>
 
     <div class="section-h">מטריצת מקורות איום (Origins)</div>
     <div class="origin-grid">
-        <div class="card-sm"><img src="https://flagcdn.com/w80/ir.png" class="flag-img"><span class="country-name">איראן</span><span class="country-val">20%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/lb.png" class="flag-img"><span class="country-name">לבנון</span><span class="country-val">15%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/ye.png" class="flag-img"><span class="country-name">תימן</span><span class="country-val">6%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/iq.png" class="flag-img"><span class="country-name">עיראק</span><span class="country-val">6%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/ir.png" class="flag-img"><span class="country-name">איראן</span><span class="country-val">18%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/lb.png" class="flag-img"><span class="country-name">לבנון</span><span class="country-val">12%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/ye.png" class="flag-img"><span class="country-name">תימן</span><span class="country-val">5%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/iq.png" class="flag-img"><span class="country-name">עיראק</span><span class="country-val">5%</span></div>
     </div>
 
     <div class="section-h">פרוטוקול תגובה אופרטיבי (Action Tiers)</div>
     <table class="data-table">
-        <thead><tr><th>טווח B.R.I</th><th>סטטוס</th><th>הנחיות אופרטיביות</th></tr></thead>
+        <thead><tr><th>טווח B.R.I</th><th>סטטוס</th><th>הנחיות</th></tr></thead>
         <tbody>
-            <tr style="color:var(--green)"><td>0% - 35%</td><td>שגרה דרוכה</td><td><b>(נוכחי)</b> המשך פעילות רגילה. וידוא זמינות תקשורת בלבד.</td></tr>
-            <tr style="color:var(--orange)"><td>36% - 50%</td><td>ערנות טקטית</td><td>וידוא תקינות מרחב מוגן, טעינת מכשירים, דריכות מודיעינית.</td></tr>
-            <tr style="color:#ffae00; background:rgba(255,174,0,0.05)"><td>51% - 65%</td><td>דריכות אופרטיבית</td><td>צמצום התקהלויות, וידוא מלאי מים/מזון, שהייה ליד מבנים קשיחים.</td></tr>
-            <tr style="color:var(--red); background:rgba(255,49,49,0.1)"><td>65% +</td><td>סטטוס קריטי</td><td>שהייה בקרבת מרחב מוגן מיידי. מעקב צופרים רציף.</td></tr>
+            <tr style="color:var(--green)"><td>0% - 35%</td><td>שגרה דרוכה</td><td>המשך פעילות רגילה.</td></tr>
+            <tr style="color:var(--orange); background:rgba(255,140,0,0.05)"><td>36% - 50%</td><td>ערנות טקטית</td><td><b>(נוכחי)</b> וידוא תקינות ממ"ד, דריכות מודיעינית.</td></tr>
+            <tr style="color:#ffae00"><td>51% - 65%</td><td>דריכות אופרטיבית</td><td>צמצום התקהלויות, שהייה ליד מבנים קשיחים.</td></tr>
+            <tr style="color:var(--red)"><td>65% +</td><td>סטטוס קריטי</td><td>שהייה בקרבת מרחב מוגן מיידי.</td></tr>
         </tbody>
     </table>
 
-    <div class="section-h">ניתוח שינויים וקטוריים (Logs)</div>
-    <div class="log-box">
-        <b style="color:var(--accent)">ניתוח מקצועי:</b> רמת ה-B.R.I עומדת על 35% ("שגרה דרוכה"). העלייה נובעת מ-SAI גבוה (53.3) וסימנים מעידים בתשתיות (בריאות/פקע"ר). רמות התגובה עודכנו כדי לאפשר מדרג הכנה הדרגתי. שלב ה"דריכות האופרטיבית" יופעל רק מעל 50%. וקטור A יציב ב-98%.
-    </div>
-
-    <div class="section-h">ניתוח דטרמיניסטי (6 Vectors)</div>
+    <div class="section-h">וקטורים משפיעים (Deterministic Data)</div>
     <table class="data-table">
         <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
         <tbody>
-            <tr><td>SAI</td><td>מתח אסטרטגי (כוחות/קשר)</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+23%</td></tr>
-            <tr><td>INFRA</td><td>תשתיות (בריאות/אנרגיה/פקע"ר)</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+3%</td></tr>
+            <tr><td>SAI</td><td>מתח אסטרטגי (איראן/לבנון)</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+18%</td></tr>
+            <tr><td>LOGS_LOC</td><td>מקלטים ציבוריים (נתניה)</td><td><span class="badge" style="color:var(--blue); border-color:var(--blue)">READY</span></td><td style="color:var(--blue)">+15%</td></tr>
+            <tr><td>VEC_B</td><td>שיבושי GPS וסיגנל (GNSS)</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">CLEAR</span></td><td style="color:var(--green)">0%</td></tr>
             <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות)</td><td><span class="badge" style="color:var(--blue); border-color:var(--blue)">MITIG</span></td><td style="color:var(--blue)">-10%</td></tr>
-            <tr><td>MARITIME</td><td>תעבורה ימית וסחר</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">STABLE</span></td><td>0%</td></tr>
-            <tr><td>VEC_B</td><td>שיבושי GPS וסיגנל</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">SENSOR</span></td><td>0%</td></tr>
-            <tr><td>LOGS_LOC</td><td>לוגיסטיקה עירונית (מקלטים)</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">LOCAL</span></td><td>0%</td></tr>
         </tbody>
     </table>
 
-    <div style="text-align:center; margin-top:20px; opacity:0.4; font-size:0.7rem; filter: grayscale(1);">
-        <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V6&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
-        <br>RESILIENCE_V6.2_SYNC
+    <div class="disclaimer-full">
+        <b>הבהרה:</b> דשבורד ORACLE הוא כלי מחקרי המבוסס על נתוני שטח גלויים (OSINT). המידע אינו מחליף את הנחיות פיקוד העורף. השקט בוקטור ה-GPS מעיד על יציבות אלקטרונית נכון לרגע זה.
+    </div>
+
+    <div style="text-align:center; margin-top:20px; opacity:0.3; font-size:0.7rem; filter: grayscale(1);">
+        <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V7&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
+        <br>TRUTH_PATCH_V7.2_FINAL
     </div>
 </div>
 </body>
