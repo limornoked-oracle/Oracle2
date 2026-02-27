@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | Truth Patch v7.2</title>
+    <title>ORACLE SYSTEM | Hierarchy Alignment v7.3</title>
     <style>
         :root { 
             --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
@@ -32,18 +32,18 @@
         .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
         .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
         .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
-        .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--green); }
+        .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--orange); }
         .disclaimer-full { background: #080a0e; border-right: 5px solid var(--red); padding: 20px; font-size: 0.85rem; line-height: 1.8; color: #9da5b1; border-radius: 4px; }
     </style>
 </head>
 <body>
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.2_TRUTH</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.3_HIERARCHY</div>
         <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
         <div class="sync-badge">
             <span class="sync-label">סנכרון שבת</span>
-            <span class="sync-time">17:03</span>
+            <span class="sync-time">17:05</span>
         </div>
     </header>
 
@@ -51,7 +51,7 @@
     <div class="main-stats">
         <div class="card-big nat">
             <div style="font-size: 1rem; color:var(--orange); font-weight: bold;">ישראל (לאומי)</div>
-            <div class="val">38%</div>
+            <div class="val">42%</div>
             <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--orange)">ערנות טקטית</span></div>
         </div>
         <div class="card-big loc">
@@ -63,15 +63,15 @@
 
     <div class="section-h">ניתוח דטרמיניסטי (Logs)</div>
     <div class="log-box">
-        <b style="color:var(--green)">עדכון 17:03:</b> תיקון דטרמיניסטי - מפות GNSS מראות שמיים נקיים משיבושים (ירוק) מעל לבנון וסוריה, מה שמוריד את הסבירות למגע מיידי בדקות הקרובות. המדד הלאומי ירד ל-38%. עם זאת, פתיחת המקלטים בנתניה (40%) והודעת ה-NOTAM האיראנית על סגירת שמיים בלילה מחייבים דריכות מודיעינית בשעות הקרובות. וקטור A (תעופה) נותר יציב.
+        <b style="color:var(--orange)">עדכון 17:05:</b> תיקון היררכי - המדד הלאומי (42%) משמש כגג עליון למדד המקומי (40%). הנתונים משקפים מתיחות אסטרטגית בשל ה-NOTAM האיראני, בעוד שוקטור ה-GPS הירוק ושמירה על לוח טיסות אזרחי בנתב"ג מונעים חצייה של רף ה-50%. נתניה מיושרת לרמת המוכנות המדינתית עם יתרון לוגיסטי בשל פתיחת המקלטים.
     </div>
 
     <div class="section-h">מטריצת מקורות איום (Origins)</div>
     <div class="origin-grid">
-        <div class="card-sm"><img src="https://flagcdn.com/w80/ir.png" class="flag-img"><span class="country-name">איראן</span><span class="country-val">18%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/lb.png" class="flag-img"><span class="country-name">לבנון</span><span class="country-val">12%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/ye.png" class="flag-img"><span class="country-name">תימן</span><span class="country-val">5%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/iq.png" class="flag-img"><span class="country-name">עיראק</span><span class="country-val">5%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/ir.png" class="flag-img"><span class="country-name">איראן</span><span class="country-val">20%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/lb.png" class="flag-img"><span class="country-name">לבנון</span><span class="country-val">15%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/ye.png" class="flag-img"><span class="country-name">תימן</span><span class="country-val">6%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/iq.png" class="flag-img"><span class="country-name">עיראק</span><span class="country-val">6%</span></div>
     </div>
 
     <div class="section-h">פרוטוקול תגובה אופרטיבי (Action Tiers)</div>
@@ -89,20 +89,20 @@
     <table class="data-table">
         <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
         <tbody>
-            <tr><td>SAI</td><td>מתח אסטרטגי (איראן/לבנון)</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+18%</td></tr>
-            <tr><td>LOGS_LOC</td><td>מקלטים ציבוריים (נתניה)</td><td><span class="badge" style="color:var(--blue); border-color:var(--blue)">READY</span></td><td style="color:var(--blue)">+15%</td></tr>
-            <tr><td>VEC_B</td><td>שיבושי GPS וסיגנל (GNSS)</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">CLEAR</span></td><td style="color:var(--green)">0%</td></tr>
+            <tr><td>SAI</td><td>מתח אסטרטגי (כוחות/קשר)</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+23%</td></tr>
+            <tr><td>INFRA</td><td>הנחיות פקע"ר ותשתיות</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+12%</td></tr>
+            <tr><td>LOGS_LOC</td><td>מוכנות עירונית (נתניה)</td><td><span class="badge" style="color:var(--blue); border-color:var(--blue)">READY</span></td><td style="color:var(--blue)">+10%</td></tr>
             <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות)</td><td><span class="badge" style="color:var(--blue); border-color:var(--blue)">MITIG</span></td><td style="color:var(--blue)">-10%</td></tr>
         </tbody>
     </table>
 
     <div class="disclaimer-full">
-        <b>הבהרה:</b> דשבורד ORACLE הוא כלי מחקרי המבוסס על נתוני שטח גלויים (OSINT). המידע אינו מחליף את הנחיות פיקוד העורף. השקט בוקטור ה-GPS מעיד על יציבות אלקטרונית נכון לרגע זה.
+        <b>הבהרה:</b> המידע מבוסס על נתוני OSINT דטרמיניסטיים. כל עוד וקטור התעופה (VEC_A) יציב, המערכת נשמרת בטווח הערנות הטקטית. יש להישמע להנחיות פיקוד העורף.
     </div>
 
     <div style="text-align:center; margin-top:20px; opacity:0.3; font-size:0.7rem; filter: grayscale(1);">
         <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V7&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
-        <br>TRUTH_PATCH_V7.2_FINAL
+        <br>HIERARCHY_V7.3_FINAL
     </div>
 </div>
 </body>
