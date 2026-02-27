@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | CoT Analysis v7.9.9</title>
+    <title>ORACLE SYSTEM | Night Watch v8.0.0</title>
     <style>
         :root { 
             --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
@@ -36,17 +36,18 @@
         .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
         .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--orange); }
         .disclaimer-box { background: rgba(15, 15, 20, 0.8); border: 1px solid var(--border); border-right: 4px solid var(--red); padding: 20px; margin-top: 10px; border-radius: 4px; }
+        .disclaimer-title { color: var(--red); font-weight: bold; font-size: 0.95rem; margin-bottom: 8px; display: block; }
         .disclaimer-text { font-size: 0.85rem; line-height: 1.6; color: #b0b8c1; }
     </style>
 </head>
 <body>
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.9.9_CoT</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 8.0.0_NIGHT_WATCH</div>
         <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
         <div class="sync-badge">
-            <span style="font-size: 0.65rem; color: var(--blue); display: block;">ניתוח שרשרת מחשבה</span>
-            <span class="sync-time">22:45</span>
+            <span style="font-size: 0.65rem; color: var(--blue); display: block;">סנכרון לילה מאוחר</span>
+            <span class="sync-time">23:23</span>
         </div>
     </header>
 
@@ -54,12 +55,12 @@
     <div class="main-stats">
         <div class="card-big nat">
             <div style="font-size: 1rem; color:var(--orange); font-weight: bold;">ישראל (לאומי)</div>
-            <div class="val">46%</div>
+            <div class="val">43%</div>
             <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: ערנות טקטית</div>
         </div>
         <div class="card-big loc">
             <div style="font-size: 1rem; color:var(--blue); font-weight: bold;">נתניה (מקומי)</div>
-            <div class="val">41%</div>
+            <div class="val">39%</div>
             <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: מוכנות גבוהה</div>
         </div>
     </div>
@@ -69,13 +70,13 @@
         <div class="card-sm">
             <img src="https://flagcdn.com/w80/ir.png" class="flag-img">
             <span style="font-weight:bold; display:block;">איראן</span>
-            <span class="country-val">38%</span>
+            <span class="country-val">34%</span>
             <span class="prob-label">הסתברות תקיפה</span>
         </div>
         <div class="card-sm">
             <img src="https://flagcdn.com/w80/lb.png" class="flag-img">
             <span style="font-weight:bold; display:block;">לבנון</span>
-            <span class="country-val">22%</span>
+            <span class="country-val">20%</span>
             <span class="prob-label">הסתברות תקיפה</span>
         </div>
         <div class="card-sm">
@@ -96,16 +97,16 @@
     <table class="data-table">
         <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
         <tbody>
-            <tr><td>SAI</td><td>מתח אסטרטגי (54.2 - מגמת יציבות)</td><td><span style="color:var(--orange)">COOLING</span></td><td>+25%</td></tr>
+            <tr><td>SAI</td><td>מתח אסטרטגי (53.7 - מגמת התקררות)</td><td><span style="color:var(--orange)">COOLING</span></td><td>+20%</td></tr>
             <tr><td>INFRA</td><td>הנחיות פקע"ר ומקלטים פתוחים</td><td><span style="color:var(--orange)">READY</span></td><td>+12%</td></tr>
             <tr><td>VEC_B</td><td>שיבושי GPS (מצב נוכחי: ירוק)</td><td><span style="color:var(--green)">CLEAR</span></td><td>0%</td></tr>
-            <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות תקין)</td><td><span style="color:var(--blue)">MITIG</span></td><td>-15%</td></tr>
+            <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות תקין)</td><td><span style="color:var(--blue)">MITIG</span></td><td>-17%</td></tr>
         </tbody>
     </table>
 
     <div class="section-h">ניתוח דטרמיניסטי (Logs)</div>
     <div class="log-box">
-        <b style="color:var(--orange)">ניתוח שרשרת מחשבה (22:45):</b> למרות ה-SAI הגבוה, העדר שיבושי GPS (וקטור B) והמשך פעילות חברות תעופה זרות (וקטור A) מונעים את חציית קו ה-50%. המודל מזהה "דריכה ללא שיגור". הסיכון המרכזי נותר מאיראן בשל המגבלות האוויריות המדווחות שם.
+        <b style="color:var(--orange)">ניתוח לילה (23:23):</b> הירידה ב-SAI ל-53.7 מחזקת את הערכת ה"השהייה האופרטיבית". וקטור התעופה (VEC_A) נותר יציב לחלוטין, מה שמעיד על העדר התרעה מיידית לסגירת המרחב. המודל מזהה רגיעה הדרגתית אך שומר על רמת "ערנות טקטית" בשל המצב האסטרטגי הכולל.
     </div>
 
     <div class="disclaimer-box">
@@ -117,7 +118,7 @@
 
     <div style="text-align:center; margin-top:10px; opacity:0.3; font-size:0.7rem; filter: grayscale(1);">
         <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V7&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
-        <br>CoT_ANALYSIS_V7.9.9
+        <br>NIGHT_WATCH_V8.0.0
     </div>
 </div>
 </body>
