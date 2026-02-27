@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | Hierarchy Alignment v7.3</title>
+    <title>ORACLE SYSTEM | Final Safety v7.4</title>
     <style>
         :root { 
             --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
             --blue: #00d4ff; --accent: #00f2ff; --text: #e1e4e8; --border: #1b2129; 
-            --red: #ff3131; --glow: 0 0 15px rgba(0, 212, 255, 0.2);
+            --red: #ff3131; --glow: 0 0 15px rgba(0, 242, 255, 0.2);
         }
         body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 20px; }
@@ -24,26 +24,24 @@
         .card-big.loc { border-top: 4px solid var(--blue); }
         .card-big .val { font-size: 4rem; font-weight: 900; color: var(--orange); }
         .card-big.loc .val { color: var(--blue); }
-        .origin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        @media (min-width: 768px) { .origin-grid { grid-template-columns: repeat(4, 1fr); } }
-        .card-sm { background: var(--panel); border: 1px solid var(--border); padding: 25px 15px; border-radius: 8px; text-align: center; }
-        .flag-img { width: 45px; height: auto; border-radius: 3px; margin-bottom: 10px; border: 1px solid #30363d; }
-        .card-sm .country-val { font-size: 1.8rem; font-weight: 900; color: var(--red); }
         .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
         .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
         .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
         .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--orange); }
-        .disclaimer-full { background: #080a0e; border-right: 5px solid var(--red); padding: 20px; font-size: 0.85rem; line-height: 1.8; color: #9da5b1; border-radius: 4px; }
+        
+        /* New Safety Box */
+        .safety-warning { background: rgba(255, 49, 49, 0.1); border: 2px solid var(--red); padding: 20px; border-radius: 8px; color: #fff; font-weight: bold; text-align: center; margin-top: 10px; }
+        .safety-warning b { color: var(--red); font-size: 1.1rem; text-transform: uppercase; display: block; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.3_HIERARCHY</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.4_SAFETY_LOCK</div>
         <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
         <div class="sync-badge">
             <span class="sync-label">סנכרון שבת</span>
-            <span class="sync-time">17:05</span>
+            <span class="sync-time">17:08</span>
         </div>
     </header>
 
@@ -63,27 +61,15 @@
 
     <div class="section-h">ניתוח דטרמיניסטי (Logs)</div>
     <div class="log-box">
-        <b style="color:var(--orange)">עדכון 17:05:</b> תיקון היררכי - המדד הלאומי (42%) משמש כגג עליון למדד המקומי (40%). הנתונים משקפים מתיחות אסטרטגית בשל ה-NOTAM האיראני, בעוד שוקטור ה-GPS הירוק ושמירה על לוח טיסות אזרחי בנתב"ג מונעים חצייה של רף ה-50%. נתניה מיושרת לרמת המוכנות המדינתית עם יתרון לוגיסטי בשל פתיחת המקלטים.
+        <b style="color:var(--orange)">ניתוח אחרון (17:08):</b> המדדים משקפים עלייה במוכנות הלאומית והמקומית בשל הודעות רשמיות (פקע"ר/עיריית נתניה) ו-NOTAM איראני. עם זאת, וקטור ה-GPS הירוק ושמירה על לוח הטיסות מעידים על כך שהמגע הפיזי טרם החל. המודל מסנן רעשים ומתמקד בעובדות OSINT גלויות בלבד.
     </div>
 
-    <div class="section-h">מטריצת מקורות איום (Origins)</div>
-    <div class="origin-grid">
-        <div class="card-sm"><img src="https://flagcdn.com/w80/ir.png" class="flag-img"><span class="country-name">איראן</span><span class="country-val">20%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/lb.png" class="flag-img"><span class="country-name">לבנון</span><span class="country-val">15%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/ye.png" class="flag-img"><span class="country-name">תימן</span><span class="country-val">6%</span></div>
-        <div class="card-sm"><img src="https://flagcdn.com/w80/iq.png" class="flag-img"><span class="country-name">עיראק</span><span class="country-val">6%</span></div>
+    <div class="safety-warning">
+        <b>⚠️ אזהרת בטיחות קריטית</b>
+        דשבורד זה מציג ניתוח הסתברות אסטרטגי בלבד ואינו מהווה מערכת התרעה. <br>
+        בכל מקרה של אזעקה, צופר או הנחיה רשמית - יש לפעול מיידית לפי הנחיות פיקוד העורף. <br>
+        אין להסתמך על אחוזי המודל כהצדקה לעיכוב בכניסה למרחב מוגן.
     </div>
-
-    <div class="section-h">פרוטוקול תגובה אופרטיבי (Action Tiers)</div>
-    <table class="data-table">
-        <thead><tr><th>טווח B.R.I</th><th>סטטוס</th><th>הנחיות</th></tr></thead>
-        <tbody>
-            <tr style="color:var(--green)"><td>0% - 35%</td><td>שגרה דרוכה</td><td>המשך פעילות רגילה.</td></tr>
-            <tr style="color:var(--orange); background:rgba(255,140,0,0.05)"><td>36% - 50%</td><td>ערנות טקטית</td><td><b>(נוכחי)</b> וידוא תקינות ממ"ד, דריכות מודיעינית.</td></tr>
-            <tr style="color:#ffae00"><td>51% - 65%</td><td>דריכות אופרטיבית</td><td>צמצום התקהלויות, שהייה ליד מבנים קשיחים.</td></tr>
-            <tr style="color:var(--red)"><td>65% +</td><td>סטטוס קריטי</td><td>שהייה בקרבת מרחב מוגן מיידי.</td></tr>
-        </tbody>
-    </table>
 
     <div class="section-h">וקטורים משפיעים (Deterministic Data)</div>
     <table class="data-table">
@@ -96,13 +82,9 @@
         </tbody>
     </table>
 
-    <div class="disclaimer-full">
-        <b>הבהרה:</b> המידע מבוסס על נתוני OSINT דטרמיניסטיים. כל עוד וקטור התעופה (VEC_A) יציב, המערכת נשמרת בטווח הערנות הטקטית. יש להישמע להנחיות פיקוד העורף.
-    </div>
-
     <div style="text-align:center; margin-top:20px; opacity:0.3; font-size:0.7rem; filter: grayscale(1);">
         <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V7&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
-        <br>HIERARCHY_V7.3_FINAL
+        <br>HIERARCHY_V7.4_SAFETY_LOCK
     </div>
 </div>
 </body>
