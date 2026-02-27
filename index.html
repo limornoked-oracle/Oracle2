@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | SAI Update v7.9.2</title>
+    <title>ORACLE SYSTEM | Night Sync v7.9.4</title>
     <style>
         :root { 
             --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
             --blue: #00d4ff; --accent: #00f2ff; --text: #e1e4e8; --border: #1b2129; 
-            --red: #ff3131; --glow: 0 0 15px rgba(255, 49, 49, 0.2);
+            --red: #ff3131;
         }
         body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 20px; }
         header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--accent); padding-bottom: 15px; }
-        .sync-badge { background: rgba(255, 49, 49, 0.1); border: 1px solid var(--red); padding: 8px 15px; border-radius: 6px; text-align: left; }
-        .sync-time { font-family: monospace; font-size: 1.2rem; font-weight: bold; color: var(--red); }
+        .sync-badge { background: rgba(0, 212, 255, 0.1); border: 1px solid var(--blue); padding: 8px 15px; border-radius: 6px; text-align: left; }
+        .sync-time { font-family: monospace; font-size: 1.2rem; font-weight: bold; color: var(--accent); }
         .h-main-title { color: var(--orange); font-weight: 900; font-size: 1.5rem; text-align: center; flex-grow: 1; }
         .section-h { font-size: 1rem; color: var(--accent); font-weight: bold; border-right: 4px solid var(--accent); padding-right: 12px; margin-top: 5px; text-transform: uppercase; }
         .main-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .card-big { background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 12px; text-align: center; position: relative; }
-        .card-big.nat { border-top: 4px solid var(--red); box-shadow: 0 0 20px rgba(255, 49, 49, 0.1); }
+        .card-big.nat { border-top: 4px solid var(--orange); }
         .card-big.loc { border-top: 4px solid var(--blue); }
-        .card-big .val { font-size: 4rem; font-weight: 900; color: var(--red); }
+        .card-big .val { font-size: 4rem; font-weight: 900; color: var(--orange); }
         .card-big.loc .val { color: var(--blue); }
         
         .origin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -31,10 +31,7 @@
         .card-sm .country-val { font-size: 2rem; font-weight: 900; color: var(--red); display: block; }
         .card-sm .prob-label { font-size: 0.7rem; color: #8b949e; margin-top: 5px; display: block; }
 
-        .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-        .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
-        .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
-        .log-box { background: rgba(255, 49, 49, 0.05); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--red); }
+        .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--orange); }
         .disclaimer-box { background: rgba(11, 15, 20, 0.5); border: 1px solid var(--border); border-right: 4px solid var(--orange); padding: 20px; margin-top: 10px; border-radius: 4px; }
         .disclaimer-text { font-size: 0.85rem; line-height: 1.6; color: #8b949e; }
     </style>
@@ -42,24 +39,24 @@
 <body>
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.9.2_SAI_CRIT</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 7.9.4_NIGHT</div>
         <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
         <div class="sync-badge">
-            <span style="font-size: 0.65rem; color: var(--red); display: block;">עדכון SAI דחוף</span>
-            <span class="sync-time">20:15</span>
+            <span style="font-size: 0.65rem; color: var(--blue); display: block;">סנכרון לילה</span>
+            <span class="sync-time">21:18</span>
         </div>
     </header>
 
     <div class="section-h">מדדי הסתברות (Base Readiness Index)</div>
     <div class="main-stats">
         <div class="card-big nat">
-            <div style="font-size: 1rem; color:var(--red); font-weight: bold;">ישראל (לאומי)</div>
-            <div class="val">49%</div>
-            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--red)">ערנות עליונה</span></div>
+            <div style="font-size: 1rem; color:var(--orange); font-weight: bold;">ישראל (לאומי)</div>
+            <div class="val">47%</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: ערנות טקטית</div>
         </div>
         <div class="card-big loc">
             <div style="font-size: 1rem; color:var(--blue); font-weight: bold;">נתניה (מקומי)</div>
-            <div class="val">44%</div>
+            <div class="val">42%</div>
             <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: מוכנות גבוהה</div>
         </div>
     </div>
@@ -69,7 +66,7 @@
         <div class="card-sm">
             <img src="https://flagcdn.com/w80/ir.png" class="flag-img">
             <span style="font-weight:bold; display:block;">איראן</span>
-            <span class="country-val">42%</span>
+            <span class="country-val">40%</span>
             <span class="prob-label">הסתברות תקיפה</span>
         </div>
         <div class="card-sm">
@@ -94,31 +91,19 @@
 
     <div class="section-h">ניתוח דטרמיניסטי (Logs)</div>
     <div class="log-box">
-        <b style="color:var(--red)">עדכון קריטי (20:15):</b> מדד ה-SAI עלה ל-**54.9**. העלייה נובעת מהרחבת ה-NOTAM במערב איראן ואימות חתימות קשר מבצעיות. המדד הלאומי (49%) נמצא על סף מעבר לשלב "דריכות אופרטיבית". וקטור התעופה (98%) ושקט ב-GPS בלבנון הם הבלמים היחידים כרגע.
+        <b style="color:var(--orange)">סנכרון לילה (21:18):</b> מדד ה-SAI עומד על 54.6. נתוני השטח (GPS ירוק בלבנון ותנועה תקינה בנתב"ג) שומרים על המדד הלאומי מתחת לרף ה-50%. רמת המוכנות בנתניה נותרת בטווח הגבוה בשל פתיחת המקלטים המקומית. דגש על סגירת המרחב האווירי במערב איראן הלילה.
     </div>
 
-    <div class="section-h">וקטורים משפיעים (Deterministic Data)</div>
-    <table class="data-table">
-        <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
-        <tbody>
-            <tr><td>SAI</td><td>מתח אסטרטגי (נתון מעודכן)</td><td><span style="color:var(--red)">HIGH</span></td><td>+29%</td></tr>
-            <tr><td>INFRA</td><td>הנחיות פקע"ר ותשתיות</td><td><span style="color:var(--orange)">RISK</span></td><td>+12%</td></tr>
-            <tr><td>LOGS_LOC</td><td>מוכנות עירונית (נתניה)</td><td><span style="color:var(--blue)">READY</span></td><td>+13%</td></tr>
-            <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות)</td><td><span style="color:var(--blue)">MITIG</span></td><td>-10%</td></tr>
-        </tbody>
-    </table>
-
     <div class="disclaimer-box">
-        <span class="disclaimer-title">הערה אופרטיבית</span>
         <div class="disclaimer-text">
-            דשבורד ORACLE הוא כלי לניתוח הסתברות אסטרטגית המבוסס על נתוני OSINT גלויים. 
-            <b>בכל מקרה של אזעקה או הנחיה רשמית, יש לפעול מיידית אך ורק לפי הנחיות פיקוד העורף.</b> 
+            <b>הערה אופרטיבית:</b> המידע מבוסס על נתוני OSINT גלויים ואינו מערכת התרעה רשמית. 
+            בכל מקרה של אזעקה, יש לפעול מיידית לפי הנחיות פיקוד העורף.
         </div>
     </div>
 
     <div style="text-align:center; margin-top:10px; opacity:0.3; font-size:0.7rem; filter: grayscale(1);">
         <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V7&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
-        <br>SAI_CRITICAL_V7.9.2
+        <br>V7.9.4_NIGHT_SYNC
     </div>
 </div>
 </body>
