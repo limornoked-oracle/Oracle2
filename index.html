@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | Tactical Interface v5.5</title>
+    <title>ORACLE SYSTEM | Resilience v6.2</title>
     <style>
         :root { 
             --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
@@ -27,81 +27,81 @@
         @media (min-width: 768px) { .origin-grid { grid-template-columns: repeat(4, 1fr); } }
         .card-sm { background: var(--panel); border: 1px solid var(--border); padding: 25px 15px; border-radius: 8px; text-align: center; }
         .flag-img { width: 45px; height: auto; border-radius: 3px; margin-bottom: 10px; border: 1px solid #30363d; }
-        .card-sm .country-name { font-size: 1.2rem; font-weight: bold; color: var(--text); display: block; margin-bottom: 8px; }
-        .card-sm .country-val { font-size: 2rem; font-weight: 900; color: var(--red); }
+        .card-sm .country-name { font-size: 1.1rem; font-weight: bold; color: var(--text); display: block; margin-bottom: 8px; }
+        .card-sm .country-val { font-size: 1.8rem; font-weight: 900; color: var(--red); }
         .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
         .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
         .data-table th { background: #11161d; font-size: 0.9rem; color: var(--accent); }
         .badge { padding: 4px 8px; border: 1px solid; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
         .log-box { background: var(--panel); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--accent); }
-        .disclaimer-full { background: #080a0e; border-right: 5px solid var(--red); padding: 25px; font-size: 0.9rem; line-height: 1.8; color: #9da5b1; border-radius: 4px; }
+        .disclaimer-full { background: #080a0e; border-right: 5px solid var(--red); padding: 20px; font-size: 0.85rem; line-height: 1.8; color: #9da5b1; border-radius: 4px; }
     </style>
 </head>
 <body>
 <div class="dashboard">
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 5.5_STABLE</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 6.2_RESILIENCE</div>
         <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
         <div class="sync-badge">
             <span class="sync-label">סנכרון אחרון</span>
-            <span class="sync-time">16:22</span>
+            <span class="sync-time">17:15</span>
         </div>
     </header>
 
     <div class="section-h">מדדי הסתברות (Base Readiness Index)</div>
     <div class="main-stats">
-        <div class="card-big nat"><div style="font-size: 1rem; color:var(--orange); letter-spacing: 1px; font-weight: bold;">ישראל (לאומי)</div><div class="val">32%</div><div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--orange)">דריכות טקטית</span></div></div>
-        <div class="card-big loc"><div style="font-size: 1rem; color:var(--blue); letter-spacing: 1px; font-weight: bold;">נתניה (מקומי)</div><div class="val" style="color:var(--blue); text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);">18%</div><div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: שגרה מתוחה</div></div>
+        <div class="card-big nat">
+            <div style="font-size: 1rem; color:var(--orange); letter-spacing: 1px; font-weight: bold;">ישראל (לאומי)</div>
+            <div class="val">35%</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--green)">שגרה דרוכה</span></div>
+        </div>
+        <div class="card-big loc">
+            <div style="font-size: 1rem; color:var(--blue); letter-spacing: 1px; font-weight: bold;">נתניה (מקומי)</div>
+            <div class="val" style="color:var(--blue); text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);">18%</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: שגרה מלאה</div>
+        </div>
     </div>
 
-    <div class="section-h">מטריצת מקורות איום (Threat Origin Matrix)</div>
+    <div class="section-h">מטריצת מקורות איום (Origins)</div>
     <div class="origin-grid">
-        <div class="card-sm">
-            <img src="https://flagcdn.com/w80/ir.png" class="flag-img" alt="Iran">
-            <span class="country-name">איראן</span>
-            <span class="country-val">20%</span>
-        </div>
-        <div class="card-sm">
-            <img src="https://flagcdn.com/w80/lb.png" class="flag-img" alt="Lebanon">
-            <span class="country-name">לבנון</span>
-            <span class="country-val">15%</span>
-        </div>
-        <div class="card-sm">
-            <img src="https://flagcdn.com/w80/ye.png" class="flag-img" alt="Yemen">
-            <span class="country-name">תימן</span>
-            <span class="country-val">6%</span>
-        </div>
-        <div class="card-sm">
-            <img src="https://flagcdn.com/w80/iq.png" class="flag-img" alt="Iraq">
-            <span class="country-name">עיראק</span>
-            <span class="country-val">6%</span>
-        </div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/ir.png" class="flag-img"><span class="country-name">איראן</span><span class="country-val">20%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/lb.png" class="flag-img"><span class="country-name">לבנון</span><span class="country-val">15%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/ye.png" class="flag-img"><span class="country-name">תימן</span><span class="country-val">6%</span></div>
+        <div class="card-sm"><img src="https://flagcdn.com/w80/iq.png" class="flag-img"><span class="country-name">עיראק</span><span class="country-val">6%</span></div>
     </div>
 
-    <div class="section-h">פרוטוקול תגובה אופרטיבי (Response Matrix)</div>
+    <div class="section-h">פרוטוקול תגובה אופרטיבי (Action Tiers)</div>
     <table class="data-table">
         <thead><tr><th>טווח B.R.I</th><th>סטטוס</th><th>הנחיות אופרטיביות</th></tr></thead>
         <tbody>
-            <tr style="color:var(--green)"><td>0% - 25%</td><td>שגרה מלאה</td><td>פעילות רגילה ללא שינוי.</td></tr>
-            <tr style="color:var(--orange); background:rgba(255,140,0,0.05)"><td>26% - 40%</td><td>דריכות טקטית</td><td><b>(נוכחי)</b> וידוא זמינות תקשורת ותקינות מרחב מוגן.</td></tr>
-            <tr style="color:#ffd700"><td>41% - 55%</td><td>ערנות גבוהה</td><td>הימנעות משטחים פתוחים, הכנת תיק שהייה.</td></tr>
-            <tr style="color:var(--red); background:rgba(255,49,49,0.1)"><td>55% +</td><td>קריטי</td><td>שהייה בקרבת מרחב מוגן מיידי. מעקב צופרים.</td></tr>
+            <tr style="color:var(--green)"><td>0% - 35%</td><td>שגרה דרוכה</td><td><b>(נוכחי)</b> המשך פעילות רגילה. וידוא זמינות תקשורת בלבד.</td></tr>
+            <tr style="color:var(--orange)"><td>36% - 50%</td><td>ערנות טקטית</td><td>וידוא תקינות מרחב מוגן, טעינת מכשירים, דריכות מודיעינית.</td></tr>
+            <tr style="color:#ffae00; background:rgba(255,174,0,0.05)"><td>51% - 65%</td><td>דריכות אופרטיבית</td><td>צמצום התקהלויות, וידוא מלאי מים/מזון, שהייה ליד מבנים קשיחים.</td></tr>
+            <tr style="color:var(--red); background:rgba(255,49,49,0.1)"><td>65% +</td><td>סטטוס קריטי</td><td>שהייה בקרבת מרחב מוגן מיידי. מעקב צופרים רציף.</td></tr>
         </tbody>
     </table>
 
     <div class="section-h">ניתוח שינויים וקטוריים (Logs)</div>
     <div class="log-box">
-        <b style="color:var(--accent)">ניתוח אחרון:</b> מדד ה-SAI עלה ל-<b>53.3</b>. קיימת אינדיקציה דטרמיניסטית לעלייה במתח האסטרטגי במעגל ראשון. עם זאת, וקטור A (תעופה) נותר בשיא יציבותו (98%), מה שמעיד על כך שהמרחב האזרחי עדיין לא מושפע מהמתח האסטרטגי. אין צורך בשינוי סדר היום בשלב זה.
+        <b style="color:var(--accent)">ניתוח מקצועי:</b> רמת ה-B.R.I עומדת על 35% ("שגרה דרוכה"). העלייה נובעת מ-SAI גבוה (53.3) וסימנים מעידים בתשתיות (בריאות/פקע"ר). רמות התגובה עודכנו כדי לאפשר מדרג הכנה הדרגתי. שלב ה"דריכות האופרטיבית" יופעל רק מעל 50%. וקטור A יציב ב-98%.
     </div>
 
-    <div class="section-h">סייגים ותנאי שימוש משפטיים</div>
-    <div class="disclaimer-full">
-        <b>הבהרה משפטית:</b> דשבורד ORACLE הוא כלי מחקרי המבוסס על נתוני מודיעין גלוי (OSINT). המידע אינו מהווה הנחיה ביטחונית או תחליף למערכות פיקוד העורף. בכל מצב של אזעקה, יש לפעול אך ורק לפי הנחיות הרשויות המוסמכות. השימוש במידע על אחריות המשתמש בלבד.
-    </div>
+    <div class="section-h">ניתוח דטרמיניסטי (6 Vectors)</div>
+    <table class="data-table">
+        <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
+        <tbody>
+            <tr><td>SAI</td><td>מתח אסטרטגי (כוחות/קשר)</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+23%</td></tr>
+            <tr><td>INFRA</td><td>תשתיות (בריאות/אנרגיה/פקע"ר)</td><td><span class="badge" style="color:var(--orange); border-color:var(--orange)">RISK</span></td><td style="color:var(--orange)">+3%</td></tr>
+            <tr><td>VEC_A</td><td>חסינות תעופתית (לוח טיסות)</td><td><span class="badge" style="color:var(--blue); border-color:var(--blue)">MITIG</span></td><td style="color:var(--blue)">-10%</td></tr>
+            <tr><td>MARITIME</td><td>תעבורה ימית וסחר</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">STABLE</span></td><td>0%</td></tr>
+            <tr><td>VEC_B</td><td>שיבושי GPS וסיגנל</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">SENSOR</span></td><td>0%</td></tr>
+            <tr><td>LOGS_LOC</td><td>לוגיסטיקה עירונית (מקלטים)</td><td><span class="badge" style="color:var(--green); border-color:var(--green)">LOCAL</span></td><td>0%</td></tr>
+        </tbody>
+    </table>
 
     <div style="text-align:center; margin-top:20px; opacity:0.4; font-size:0.7rem; filter: grayscale(1);">
-        <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V5&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
-        <br>SYSTEM_ACCESS_COUNT
+        <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V6&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
+        <br>RESILIENCE_V6.2_SYNC
     </div>
 </div>
 </body>
