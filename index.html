@@ -3,96 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORACLE SYSTEM | v9.2.0 EMERGENCY</title>
+    <title>ORACLE SYSTEM | v9.2.1 EMERGENCY</title>
     <style>
         :root { 
-            --bg: #0a0000; --panel: #1a0505; --red: #ff0000; --orange: #ff4500; 
-            --blue: #00d4ff; --accent: #ff3131; --text: #f1f1f1; --border: #440000;
+            --bg: #05070a; --panel: #0b0f14; --orange: #ff8c00; --green: #00ff41; 
+            --blue: #00d4ff; --accent: #00f2ff; --text: #e1e4e8; --border: #1b2129; 
+            --red: #ff3131;
         }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
-        .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 15px; }
-        
-        .alert-banner { background: var(--red); color: white; padding: 10px; text-align: center; font-weight: 900; animation: blink 1s infinite; border-radius: 5px; font-size: 1.2rem; border: 2px solid white; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .dashboard { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 20px; }
+        header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--red); padding-bottom: 15px; }
+        .sync-badge { background: rgba(255, 49, 49, 0.2); border: 1px solid var(--red); padding: 8px 15px; border-radius: 6px; text-align: left; animation: blink 1s infinite; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-        header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--red); padding-bottom: 10px; }
-        .sync-time { font-family: monospace; font-size: 1.2rem; color: var(--red); font-weight: bold; }
-
-        .main-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card-alert { background: var(--panel); border: 2px solid var(--border); padding: 15px 5px; border-radius: 8px; text-align: center; }
-        .card-alert.active { border-color: var(--red); box-shadow: 0 0 15px rgba(255,0,0,0.4); }
-        .prob-val { font-size: 3rem; font-weight: 900; color: var(--red); }
-
-        .origin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .sync-time { font-family: monospace; font-size: 1.2rem; font-weight: bold; color: var(--red); }
+        .h-main-title { color: var(--red); font-weight: 900; font-size: 1.5rem; text-align: center; flex-grow: 1; }
+        .section-h { font-size: 1rem; color: var(--red); font-weight: bold; border-right: 4px solid var(--red); padding-right: 12px; margin-top: 5px; text-transform: uppercase; }
+        .main-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .card-big { background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 12px; text-align: center; position: relative; }
+        .card-big.nat { border-top: 4px solid var(--red); box-shadow: 0 0 20px rgba(255, 49, 49, 0.2); }
+        .card-big.loc { border-top: 4px solid var(--blue); }
+        .card-big .val { font-size: 4rem; font-weight: 900; color: var(--red); }
+        .card-big.loc .val { color: var(--blue); }
+        
+        .origin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 768px) { .origin-grid { grid-template-columns: repeat(4, 1fr); } }
-        
-        .card-sm { background: var(--panel); border: 1px solid var(--red); padding: 15px 5px; border-radius: 8px; text-align: center; }
-        .country-name { font-weight: bold; display: block; margin-bottom: 5px; color: #fff; }
-        .timer-box { background: #000; border: 1px solid var(--orange); margin-top: 8px; padding: 5px; border-radius: 4px; }
-        .timer-val { font-family: monospace; font-size: 1.1rem; color: var(--orange); font-weight: bold; }
+        .card-sm { background: var(--panel); border: 1px solid var(--border); padding: 20px 10px; border-radius: 8px; text-align: center; }
+        .flag-img { width: 45px; height: auto; border-radius: 3px; margin-bottom: 10px; border: 1px solid #30363d; }
+        .card-sm .country-val { font-size: 2rem; font-weight: 900; color: var(--red); display: block; }
+        .timer-box { background: #000; border: 1px solid var(--orange); margin-top: 10px; padding: 5px; border-radius: 4px; }
+        .timer-val { font-family: monospace; font-size: 1rem; color: var(--orange); font-weight: bold; }
 
-        .log-box { background: #2a0000; padding: 15px; border-radius: 8px; font-size: 1rem; border-right: 5px solid var(--red); }
+        .data-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .data-table td, .data-table th { padding: 15px; border-bottom: 1px solid var(--border); text-align: right; }
+        .data-table th { background: #11161d; font-size: 0.9rem; color: var(--red); }
         
-        /* Liability Disclaimer Enhanced */
-        .disclaimer-box { background: rgba(0, 0, 0, 0.9); border: 2px solid var(--red); padding: 20px; margin-top: 15px; border-radius: 4px; }
-        .disclaimer-title { color: var(--red); font-weight: 900; font-size: 1.1rem; margin-bottom: 10px; display: block; text-decoration: underline; }
-        .disclaimer-text { font-size: 0.9rem; line-height: 1.6; color: #fff; }
+        .log-box { background: rgba(255, 49, 49, 0.1); padding: 20px; border-radius: 8px; font-size: 1rem; line-height: 1.7; border-left: 4px solid var(--red); }
+        .disclaimer-box { background: rgba(15, 15, 20, 0.9); border: 2px solid var(--red); padding: 20px; margin-top: 10px; border-radius: 4px; }
+        .disclaimer-title { color: var(--red); font-weight: bold; font-size: 0.95rem; margin-bottom: 8px; display: block; }
+        .disclaimer-text { font-size: 0.85rem; line-height: 1.6; color: #f1f1f1; }
     </style>
 </head>
 <body>
 <div class="dashboard">
-    <div class="alert-banner">מצב חירום פעיל - כוננות ספיגה</div>
-    
     <header>
-        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_WAR_ROOM<br>STATUS: CRITICAL_IMPACT_RISK</div>
-        <div class="sync-time">09:31:29</div>
+        <div style="font-family:monospace; font-size:0.75rem; color: #8b949e;">● ORACLE_TACTICAL<br>VER: 9.2.1_WAR_SYNC</div>
+        <div class="h-main-title">מערכת תומכת החלטה - ORACLE</div>
+        <div class="sync-badge">
+            <span style="font-size: 0.65rem; color: var(--red); display: block;">LIVE EMERGENCY</span>
+            <span class="sync-time">09:34</span>
+        </div>
     </header>
 
+    <div class="section-h">מדדי הסתברות (Base Readiness Index)</div>
     <div class="main-stats">
-        <div class="card-alert active">
-            <span style="color:var(--red); font-size:0.85rem; font-weight:bold;">BRI לאומי</span>
-            <div class="val prob-val">95%</div>
+        <div class="card-big nat">
+            <div style="font-size: 1rem; color:var(--red); font-weight: bold;">ישראל (לאומי)</div>
+            <div class="val">95%</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: <span style="color:var(--red)">מלחמה פעילה</span></div>
         </div>
-        <div class="card-alert" style="border-color: var(--blue);">
-            <span style="color:var(--blue); font-size:0.85rem; font-weight:bold;">BRI נתניה</span>
-            <div class="val prob-val" style="color:var(--blue);">92%</div>
+        <div class="card-big loc">
+            <div style="font-size: 1rem; color:var(--blue); font-weight: bold;">נתניה (מקומי)</div>
+            <div class="val">92%</div>
+            <div style="font-size: 0.8rem; color:#8b949e; margin-top: 5px;">סטטוס: דריכות שיא</div>
         </div>
     </div>
 
+    <div class="section-h">מטריצת הסתברות וזמני הגעה משוערים</div>
     <div class="origin-grid">
         <div class="card-sm">
-            <span class="country-name">איראן</span>
-            <span style="color:var(--red); font-weight:900; font-size:1.5rem;">98%</span>
+            <img src="https://flagcdn.com/w80/ir.png" class="flag-img">
+            <span style="font-weight:bold; display:block;">איראן</span>
+            <span class="country-val">98%</span>
             <div class="timer-box"><span class="timer-val">~12:00 MIN</span></div>
         </div>
         <div class="card-sm">
-            <span class="country-name">לבנון</span>
-            <span style="color:var(--red); font-weight:900; font-size:1.5rem;">90%</span>
+            <img src="https://flagcdn.com/w80/lb.png" class="flag-img">
+            <span style="font-weight:bold; display:block;">לבנון</span>
+            <span class="country-val">90%</span>
             <div class="timer-box"><span class="timer-val">IMMEDIATE</span></div>
         </div>
         <div class="card-sm">
-            <span class="country-name">תימן</span>
-            <span style="color:var(--red); font-weight:900; font-size:1.5rem;">75%</span>
+            <img src="https://flagcdn.com/w80/ye.png" class="flag-img">
+            <span style="font-weight:bold; display:block;">תימן</span>
+            <span class="country-val">75%</span>
             <div class="timer-box"><span class="timer-val">~35:00 MIN</span></div>
         </div>
         <div class="card-sm">
-            <span class="country-name">עיראק</span>
-            <span style="color:var(--red); font-weight:900; font-size:1.5rem;">60%</span>
+            <img src="https://flagcdn.com/w80/iq.png" class="flag-img">
+            <span style="font-weight:bold; display:block;">עיראק</span>
+            <span class="country-val">60%</span>
             <div class="timer-box"><span class="timer-val">~25:00 MIN</span></div>
         </div>
     </div>
 
+    <div class="section-h">וקטורים משפיעים (Deterministic Data)</div>
+    <table class="data-table">
+        <thead><tr><th>וקטור</th><th>תיאור</th><th>סוג</th><th>השפעה</th></tr></thead>
+        <tbody>
+            <tr><td>SAI</td><td>מתח אסטרטגי (נתון נוכחי: 88.5)</td><td><span style="color:var(--red)">EXTREME</span></td><td>+45%</td></tr>
+            <tr><td>VEC_A</td><td>חסינות תעופתית (נתב"ג סגור)</td><td><span style="color:var(--red)">CLOSED</span></td><td>+30%</td></tr>
+            <tr><td>VEC_B</td><td>שיבושי GPS (חתימה אלקטרונית)</td><td><span style="color:var(--orange)">ACTIVE</span></td><td>+10%</td></tr>
+            <tr><td>INFRA</td><td>הנחיות פקע"ר ומוכנות מקלט</td><td><span style="color:var(--red)">EMERG</span></td><td>+10%</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-h">ניתוח דטרמיניסטי (Logs)</div>
     <div class="log-box">
-        <b>דיווח שטח בזמן אמת (09:31):</b> אימות השבתת נתב"ג (וקטור A ב-100% סיכון). SAI בערך קיצון. זיהוי הכנות לשיגור רב-זירתי. הטיימרים מציגים חלון זמן משוער מהרגע שיזוהה שיגור פיזי. <b>יש להיצמד למרחבים מוגנים.</b>
+        <b style="color:var(--red)">עדכון חירום (09:34):</b> אימות השבתת נתב"ג (וקטור A בשיא). SAI בערך 88.5 בעקבות דיווחים על תקיפה משולבת באיראן. זיהוי פעימות אלקטרוניות המעידות על הכנות לשיגור רב-זירתי. הטיימרים מציגים חלון היתכנות לאזעקה מרגע זיהוי שיגור פיזי. <b>יש להיצמד למרחבים מוגנים.</b>
     </div>
 
     <div class="disclaimer-box">
         <span class="disclaimer-title">כתב ויתור והסרת אחריות קריטית (Liability Disclaimer)</span>
         <div class="disclaimer-text">
-            השימוש בדשבורד זה ובכל נתון המוצג בו הנו על <b>אחריותו הבלעדית והמלאה של המשתמש בלבד</b>. מודל ORACLE הנו כלי מחקרי המבוסס על הערכות OSINT ואינו מהווה מערכת התרעה רשמית. 
-            <br><br>
-            <b>חל איסור מוחלט להסתמך על הטיימרים או האחוזים המוצגים כאן לצורך קבלת החלטות מצילות חיים.</b> בכל מקרה של אזעקה, חשש או הנחיה רשמית - יש לפעול מיידית אך ורק לפי הנחיות פיקוד העורף. המערכת ויוצריה אינם אחראים לכל נזק כתוצאה משימוש במידע זה.
+            השימוש בדשבורד זה ובנתונים המוצגים בו הנו על <b>אחריותו הבלעדית והמלאה של המשתמש בלבד</b>. מודל ORACLE הנו כלי מחקרי ואינו מהווה תחליף למערכות התרעה רשמיות. <b>בכל מקרה של אזעקה, יש לפעול מיידית אך ורק לפי הנחיות פיקוד העורף.</b> חל איסור להסתמך על הטיימרים לקבלת החלטות מצילות חיים.
         </div>
+    </div>
+
+    <div style="text-align:center; margin-top:10px; opacity:0.3; font-size:0.7rem; filter: grayscale(1);">
+        <img src="https://hitwebcounter.com/counter/counter.php?page=ORACLE_TACTICAL_V7&style=0006&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Counter" border="0" />
+        <br>V9.2.1_WAR_EMERGENCY
     </div>
 </div>
 </body>
